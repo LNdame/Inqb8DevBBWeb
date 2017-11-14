@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="b96cedc3-453b-463f-88c0-3dd05ec332b9" name="beerly_aws" url="http://ec2-13-58-20-88.us-east-2.compute.amazonaws.com">
+        <fileTransfer host="ec2-13-58-20-88.us-east-2.compute.amazonaws.com" port="22" privateKey="C:\keys\beerly_new.ppk" rootFolder="/home/ubuntu/public_html/laravel" accessType="SFTP" keyPair="true">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" />
+          </advancedOptions>
+          <option name="port" value="22" />
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>
