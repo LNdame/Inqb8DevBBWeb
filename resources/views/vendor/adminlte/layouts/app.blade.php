@@ -6,6 +6,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <html lang="en">
 
 @section('htmlheader')
+
     @include('adminlte::layouts.partials.htmlheader')
 @show
 
@@ -53,10 +54,13 @@ desired effect
 
     @include('adminlte::layouts.partials.footer')
 
+
 </div><!-- ./wrapper -->
 </div>
+
 @section('scripts')
     @include('adminlte::layouts.partials.scripts')
+    @stack('scripts')
 @show
 
 </body>

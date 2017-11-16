@@ -10,7 +10,7 @@
     <div id="app" v-cloak>
         <div class="register-box">
             <div class="register-logo">
-                <a href="{{ url('/home') }}"><b>Admin</b>LTE</a>
+                <a href="{{ url('/home') }}"><b>Beerly Beloved</b></a>
             </div>
 
             @if (count($errors) > 0)
@@ -29,7 +29,12 @@
                 <form action="{{ url('/register') }}" method="post">
                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
                     <div class="form-group has-feedback">
-                        <input type="text" class="form-control" placeholder="{{ trans('adminlte_lang::message.fullname') }}" name="name" value="{{ old('name') }}" autofocus/>
+                        <input type="text" class="form-control" placeholder="First Name" name="first_name" value="{{ old('first_name') }}" autofocus/>
+                        <span class="glyphicon glyphicon-user form-control-feedback"></span>
+                    </div>
+
+                    <div class="form-group has-feedback">
+                        <input type="text" class="form-control" placeholder="Last Name" name="last_name" value="{{ old('last_name') }}" autofocus/>
                         <span class="glyphicon glyphicon-user form-control-feedback"></span>
                     </div>
                     @if (config('auth.providers.users.field','email') === 'username')

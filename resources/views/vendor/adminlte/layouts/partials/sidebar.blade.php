@@ -34,13 +34,14 @@
             <li class="header">Admin Settings</li>
             <!-- Optionally, you can add icons to the links -->
             <li class="treeview">
-                <a href="#"><i class='fa fa-building'></i> <span>Establishments</span> <i class="fa fa-angle-left pull-right"></i></a>
+                <a ><i class='fa fa-building'></i> <span>Establishments</span> <i class="fa fa-angle-left pull-right"></i></a>
                 <ul class="treeview-menu">
+                    <li><a href="{{url('get_establishments')}}">List</a></li>
                     <li><a href="#">Establishment Types</a></li>
-                    <li><a href="#"></a></li>
+
                 </ul>
             </li>
-            <li class="#"><a href="{{ url('home') }}"><i class='fa fa-users'></i> <span>Users</span></a></li>
+            <li class="#"><a href="{{ url('/list_users') }}"><i class='fa fa-users'></i> <span>Users</span></a></li>
             <li class="#"><a href="{{ url('home') }}"><i class='fa fa-users'></i> <span>Beer Lovers</span></a></li>
             <li><a href="#"><i class='fa fa-cog'></i> <span>Roles</span></a></li>
 

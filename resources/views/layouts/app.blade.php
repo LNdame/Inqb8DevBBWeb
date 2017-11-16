@@ -9,7 +9,11 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>{{ config('app.name', 'Laravel') }}</title>
-
+    <link href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css" />
+    <link href="https://cdn.datatables.net/buttons/1.4.2/css/buttons.dataTables.min.css"/>
+    {{--<link href="https://cdn.datatables.net/buttons/1.4.2/css/buttons.dataTables.min.css"/>--}}
+    <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js" />
+    <script src="https://cdn.datatables.net/buttons/1.4.2/js/dataTables.buttons.min.js" />
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
