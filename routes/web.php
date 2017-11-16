@@ -18,11 +18,19 @@ Route::get('/', function () {
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/list_users','UsersController@index');
     Route::get('users/datatable','UsersController@getUsers')->name('get_users');
+    Route::get('create_user','UsersController@CreateUser');
+    Route::post('save_user','UsersController@SaveUser');
+    Route::get('/edit_user/{user}','UsersController@EditUser');
+    Route::get('/delete_user/{user}','UsersController@DeleteUser');
+    Route::get('/view_user/{user}','UsersController@ViewUser');
 
     Route::get('/get_establishments','EstablishmentController@index');
     Route::get('/get_establishments_datatable','EstablishmentController@getEstablishments')->name('establishments.get_establishments');
-    Route::get('create_users','EstablishmentController@AddEstablishment');
-
+    Route::get('/create_establishment','EstablishmentController@AddEstablishment');
+    Route::post('/save_establishment','EstablishmentController@SaveEstablishment');
+    Route::get('/edit_establishment/{establishment}','EstablishmentController@EditEstablishment');
+    Route::get('/delete_establishment/{establishment}','EstablishmentController@DeleteEstablishment');
+    Route::get('/view_establishment/{establishment}','EstablishmentController@ViewEstablishment');
 
     Route::get('/get_establishments_accounts','EstablishmentController@getEstablishmentAccountIndex');
     Route::get('/get_establishments_accounts_list','EstablishmentController@getEstablishmentsAccounts')->name('establishments.get_establishments_accounts');

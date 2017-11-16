@@ -12,7 +12,7 @@
                 <table class="table table-bordered" id="establishments-table" style="width:100%;">
                     <thead>
                     <tr>
-                        <th>ID</th>
+
                         <th>Name</th>
                         <th>Address</th>
                         <th>Liqour License</th>
@@ -21,7 +21,7 @@
                         <th>Contact Person</th>
                         <th>Contact Number</th>
                         <th>Status</th>
-                        {{--<th>Action</th>--}}
+                        <th>Action</th>
                     </tr>
                     </thead>
                 </table>
@@ -40,7 +40,6 @@
                     serverSide: true,
                     ajax: "{{route('establishments.get_establishments')}}",
                     columns: [
-                        {data: 'id', 'name': 'id'},
                         {data: 'name', name: 'name'},
                         {data: 'address', name: 'address'},
                         {data: 'liqour_license', name: 'liqour_license'},
@@ -49,7 +48,7 @@
                         {data: 'contact_person', name: 'contact_person'},
                         {data: 'contact_number', name: 'contact_number'},
                         {data: 'status', name: 'status'},
-//                        {data:'action',name:'action',orderable:false,searchable:false}
+                        {data:'action',name:'action',orderable:false,searchable:false}
                     ],
                     buttons:[
                         {
