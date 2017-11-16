@@ -21,6 +21,9 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('/get_establishments','EstablishmentController@index');
     Route::get('/get_establishments_datatable','EstablishmentController@getEstablishments')->name('establishments.get_establishments');
+    Route::get('create_users','EstablishmentController@AddEstablishment');
+
+
     Route::get('/get_establishments_accounts','EstablishmentController@getEstablishmentAccountIndex');
     Route::get('/get_establishments_accounts_list','EstablishmentController@getEstablishmentsAccounts')->name('establishments.get_establishments_accounts');
     Route::get('/get_establishments_types','EstablishmentController@getEstablishmentTypeIndex');
