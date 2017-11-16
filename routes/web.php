@@ -21,6 +21,18 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('/get_establishments','EstablishmentController@index');
     Route::get('/get_establishments_datatable','EstablishmentController@getEstablishments')->name('establishments.get_establishments');
+    Route::get('/get_establishments_accounts','EstablishmentController@getEstablishmentAccountIndex');
+    Route::get('/get_establishments_accounts_list','EstablishmentController@getEstablishmentsAccounts')->name('establishments.get_establishments_accounts');
+    Route::get('/get_establishments_types','EstablishmentController@getEstablishmentTypeIndex');
+    Route::get('/get_establishments_types_list','EstablishmentController@getEstablishmentsTypes')->name('establishments.get_establishments_types');
+    Route::get('/get_menus','MenusController@getMenusIndex');
+    Route::get('/get_menus_list','MenusController@getMenus')->name('menus.get_menus_list');
+
+    Route::get('/get_promotions','PromotionsController@getPromotionsIndex');
+    Route::get('/get_promotions_list','PromotionsController@getPromotions')->name('promotions.get_promotions');
+
+    Route::get('/get_beer_lovers','BeerLoversController@getBeerLoversIndex');
+    Route::get('/get_beer_lovers_list','BeerLoversController@getBeerLovers')->name('users.get_beer_lovers');
     //    Route::get('/link1', function ()    {
 //        // Uses Auth Middleware
 //    });

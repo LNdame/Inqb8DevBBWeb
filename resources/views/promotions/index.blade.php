@@ -1,7 +1,7 @@
 @extends('adminlte::layouts.app')
 
 @section('main-content')
-    <div class="container-fluid" >
+    <div class="container-fluid"  >
         <div class="row" style="margin-top:1em;">
             <div class="col-sm-2">
                 <a href="" class="btn btn-success"><i class="fa fa-plus-square"></i> Add</a>
@@ -9,15 +9,17 @@
         </div>
         <div class="row" style="margin-top:1em;">
             <div class="col-md-12">
-                <table class="table table-bordered" id="users_table" style="width:100%;">
+                <table class="table table-bordered" id="promotions-table" style="width:100%;">
                     <thead>
                     <tr>
                         <th>ID</th>
-                        <th>First Name</th>
-                        <th>Last Name</th>
-                        <th>Email</th>
-                        <th>User Name</th>
-                        <th>Action</th>
+                        <th>Title</th>
+                        <th>Beer</th>
+                        <th>Establishment</th>
+                        <th>Start Date</th>
+                        <th>End Date</th>
+                        <th>Status</th>
+                        <th>Price</th>
                     </tr>
                     </thead>
                 </table>
@@ -31,17 +33,19 @@
         $.noConflict();
         jQuery( document ).ready(function( $ ) {
             $(function () {
-                oTable = $('#users_table').DataTable({
+                oTable = $('#promotions-table').DataTable({
                     processing: true,
                     serverSide: true,
-                    ajax: "{{route('get_users')}}",
+                    ajax: "{{route('promotions.get_promotions')}}",
                     columns: [
                         {data: 'id', 'name': 'id'},
-                        {data: 'first_name', name: 'first_name'},
-                        {data: 'last_name', name: 'last_name'},
-                        {data: 'email', name: 'email'},
-                        {data: 'username', name: 'username'},
-                        {data: 'created_at', name: 'created_at'},
+                        {data: 'title', name: 'title'},
+                        {data: 'beer_id', name: 'beer_id'},
+                        {data: 'establishment_id', name: 'establishment_id'},
+                        {data: 'start_date', name: 'start_date'},
+                        {data: 'end_date', name: 'end_date'},
+                        {data: 'status', name: 'status'},
+                        {data: 'price', name: 'price'},
 //                        {data:'action',name:'action',orderable:false,searchable:false}
                     ]
                 });

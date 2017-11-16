@@ -1,10 +1,15 @@
 @extends('adminlte::layouts.app')
 
 @section('main-content')
-    <div class="container" >
-        <div class="row">
+    <div class="container-fluid" >
+        <div class="row" style="margin-top:1em;">
+            <div class="col-sm-2">
+                 <a href="" class="btn btn-success"><i class="fa fa-plus-square"></i> Add</a>
+            </div>
+        </div>
+        <div class="row" style="margin-top:2em;">
             <div class="col-md-12">
-                <table class="table table-bordered" id="users_table" style="width:100%;">
+                <table class="table table-bordered" id="establishments-table" style="width:100%;">
                     <thead>
                     <tr>
                         <th>ID</th>
@@ -30,7 +35,7 @@
         $.noConflict();
         jQuery( document ).ready(function( $ ) {
             $(function () {
-                oTable = $('#users_table').DataTable({
+                oTable = $('#establishments-table').DataTable({
                     processing: true,
                     serverSide: true,
                     ajax: "{{route('establishments.get_establishments')}}",
@@ -45,11 +50,26 @@
                         {data: 'contact_number', name: 'contact_number'},
                         {data: 'status', name: 'status'},
 //                        {data:'action',name:'action',orderable:false,searchable:false}
+                    ],
+                    buttons:[
+                        {
+                            text:'Add',
+                            action:function(e,dt, node, config){
+                             alert('ndeip');
+                            }
+                        }
                     ]
                 });
             });
         });
+        var table = $('#myTable').DataTable();
 
+        table.button().add( 0, {
+            action: function ( e, dt, button, config ) {
+                dt.ajax.reload();
+            },
+            text: 'Reload table'
+        } );
     </script>
 
 @endpush

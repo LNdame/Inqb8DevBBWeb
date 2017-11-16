@@ -17,4 +17,22 @@ class EstablishmentController extends Controller
         $establishments = DB::table('establishments')->select('*');
         return DataTables::of($establishments)->make(true);
     }
+
+    public function getEstablishmentAccountIndex(){
+        return view('establishments.accounts');
+    }
+
+    public function getEstablishmentsAccounts(){
+        $establishments_accounts = DB::table('establishment_accounts')->select('*');
+        return DataTables::of($establishments_accounts)->make(true);
+    }
+
+    public function getEstablishmentTypeIndex(){
+        return view('establishments.types');
+    }
+
+    public function getEstablishmentsTypes(){
+        $establishment_types = DB::table('establishment_types')->select('*');
+        return DataTables::of($establishment_types)->make(true);
+    }
 }

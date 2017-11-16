@@ -33,19 +33,28 @@
         <ul class="sidebar-menu">
             <li class="header">Admin Settings</li>
             <!-- Optionally, you can add icons to the links -->
-            <li class="treeview">
-                <a ><i class='fa fa-building'></i> <span>Establishments</span> <i class="fa fa-angle-left pull-right"></i></a>
+            <li class="treeview" >
+                <a ><i class='fa fa-building'></i> <span style="cursor:pointer;">Establishments</span> <i class="fa fa-angle-left pull-right"></i></a>
                 <ul class="treeview-menu">
-                    <li><a href="{{url('get_establishments')}}">List</a></li>
-                    <li><a href="#">Establishment Types</a></li>
-
+                    <li><a href="{{url('get_establishments')}}">Establishments List</a></li>
+                    <li><i class="fa fa-cubes"></i> <a href="get_establishments_types">Establishment Types</a></li>
+                    <li><i class='fa-money'></i><a href="get_establishments_accounts">Establishment Accounts</a></li>
                 </ul>
             </li>
-            <li class="#"><a href="{{ url('/list_users') }}"><i class='fa fa-users'></i> <span>Users</span></a></li>
-            <li class="#"><a href="{{ url('home') }}"><i class='fa fa-users'></i> <span>Beer Lovers</span></a></li>
-            <li><a href="#"><i class='fa fa-cog'></i> <span>Roles</span></a></li>
+            <li class="#"><a href="get_menus"><i class='fa fa-users'></i> <span style="cursor:pointer;">Menus</span></a></li>
+            <li class="#"><a href="get_promotions"><i class='fa fa-hourglass-start'></i> <span style="cursor:pointer;">Promotions</span></a></li>
+            <hr/>
+            <li class="treeview">
+                <a ><i class='fa fa-users'></i> <span style="cursor:pointer;">User Management</span> <i class="fa fa-angle-left pull-right"></i></a>
+                <ul class="treeview-menu">
+                    <li class="#"><a href="{{ url('/list_users') }}"><i class='fa fa-address-card'></i> <span>Users</span></a></li>
+                    <li class="#"><a href="{{ url('get_beer_lovers') }}"><i class='fa fa-users'></i> <span>Beer Lovers</span></a></li>
+                    <li><a href="#"><i class='fa fa-cog'></i> <span>Roles</span></a></li>
+                </ul>
+            </li>
 
         </ul><!-- /.sidebar-menu -->
     </section>
     <!-- /.sidebar -->
 </aside>
+
