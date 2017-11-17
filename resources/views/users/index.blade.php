@@ -4,7 +4,7 @@
     <div class="container-fluid" >
         <div class="row" style="margin-top:1em;">
             <div class="col-sm-2">
-                <a href="{{url('create_user')}}" class="btn btn-success"><i class="fa fa-plus-square"></i> Add</a>
+                <a href="{{url('create_user')}}" class="btn btn-success"><i class="fa fa-plus-square"></i> Add User</a>
             </div>
         </div>
         <div class="row" style="margin-top:1em;">
