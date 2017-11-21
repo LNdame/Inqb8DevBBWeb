@@ -7,7 +7,8 @@
                 <div class="box-header with-border">
                     <h3 class="box-title">Add Establishment</h3>
                 </div>
-                <form role="form" id="add-establishment" action="/save_establishment" method="post">
+                <form role="form" id="add-establishment" enctype="multipart/form-data" action="/save_establishment"
+                      method="post">
                     {{ csrf_field() }}
                     <div class="box-body">
                         <div class="row">
@@ -80,6 +81,26 @@
                                 <label for="status">Status</label>
                                 <input id="status" name="status" class="form-control" type="text"
                                        placeholder="Establishment Status">
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <label for="main_picture_url">Main Picture</label>
+                                <input id="main_picture_url" name="main_picture_url" class="form-control" type="file"
+                                       placeholder="Upload Main picture">
+                            </div>
+                        </div>
+                        <div class="row">
+
+
+                            <div class="col-md-6 form-group">
+                                <label for="picture_2">Second Picture</label>
+                                <input id="picture_2" name="picture_2" class="form-control" type="file"
+                                       placeholder="Upload Second picture">
+                            </div>
+
+                            <div class="col-md-6 form-group">
+                                <label for="picture_3">Third Picture</label>
+                                <input id="picture_3" name="picture_3" class="form-control" type="file"
+                                       placeholder="Upload Third picture">
                             </div>
                         </div>
                         <div class="box-footer">

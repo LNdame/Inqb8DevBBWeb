@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use DB;
 use Yajra\Datatables\Datatables;
 use App\Establishment;
+use Image;
+use File;
 
 class EstablishmentController extends Controller
 {
@@ -20,8 +22,33 @@ class EstablishmentController extends Controller
         DB::beginTransaction();
         try{
             $input = $request->all();
+            $main_picture_url = $request->file('main_picture_url');
+            $picture_2 = $request->file('picture_2');
+            $picture_3 = $request->file('picture_3');
+            $dir = "photos/";
+
+            if (File::exists(public_path($dir)) == false) {
+                File::makeDirectory(public_path($dir), 0777, true);
+            }
+            $img = Image::make($main_picture_url->path());
+            $img_2 = Image::make($picture_2->path());
+            $img_3 = Image::make($picture_3->path());
+
+            $path = "{$dir}" . uniqid() . "." . $main_picture_url->getClientOriginalExtension();
+            $path_2 = "{$dir}" . uniqid() . "." . $picture_2->getClientOriginalExtension();
+            $path_3 = "{$dir}" . uniqid() . "." . $picture_3->getClientOriginalExtension();
+
+            $img->save(public_path($path));
+            $img_2->save(public_path($path_2));
+            $img_3->save(public_path($path_3));
+
+            $input['main_picture_url'] = $path;
+            $input['picture_2'] = $path_2;
+            $input['picture_3'] = $path_3;
             $establishment = Establishment::create($input);
+//            dd($establishment);
            DB::commit();
+//           return redirect('/get_establishments');
         }catch(\Exception $e){
             DB::rollback();
             throw $e;

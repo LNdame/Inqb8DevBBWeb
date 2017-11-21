@@ -15,10 +15,9 @@
 
                         <th>Name</th>
                         <th>Address</th>
-                        <th>Liqour License</th>
                         <th>Longitude</th>
                         <th>Latitude</th>
-                        <th>Last Inspection Date</th>
+                        <th>Main Pic Url</th>
                         <th>Contact Person</th>
                         <th>Contact Number</th>
                         <th>Action</th>
@@ -42,13 +41,11 @@
                     columns: [
                         {data: 'name', name: 'name'},
                         {data: 'address', name: 'address'},
-                        {data: 'liqour_license', name: 'liqour_license'},
                         {data: 'longitude', name: 'longitude'},
                         {data: 'latitude', name: 'latitude'},
-                        {data: 'last_inspection_date', name: 'last_inspection_date'},
+                        {data: 'main_picture_url', name: 'main_picture_url'},
                         {data: 'contact_person', name: 'contact_person'},
                         {data: 'contact_number', name: 'contact_number'},
-
                         {data:'action',name:'action',orderable:false,searchable:false}
                     ],
                     buttons:[
