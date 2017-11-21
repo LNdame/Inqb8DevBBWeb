@@ -29,13 +29,14 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/create_establishment','EstablishmentController@AddEstablishment');
     Route::post('/save_establishment','EstablishmentController@SaveEstablishment');
     Route::get('/edit_establishment/{establishment}','EstablishmentController@EditEstablishment');
+    Route::post('/update_establishment/{establishment}', 'EstablishmentController@updateEstablishment');
     Route::get('/delete_establishment/{establishment}','EstablishmentController@DeleteEstablishment');
     Route::get('/view_establishment/{establishment}','EstablishmentController@ViewEstablishment');
 
-    Route::get('/get_establishments_accounts','EstablishmentController@getEstablishmentAccountIndex');
-    Route::get('/get_establishments_accounts_list','EstablishmentController@getEstablishmentsAccounts')->name('establishments.get_establishments_accounts');
-    Route::get('/get_establishments_types','EstablishmentController@getEstablishmentTypeIndex');
-    Route::get('/get_establishments_types_list','EstablishmentController@getEstablishmentsTypes')->name('establishments.get_establishments_types');
+    Route::get('get_establishments_accounts', 'EstablishmentController@getEstablishmentAccountIndex');
+    Route::get('get_establishments_accounts_list', 'EstablishmentController@getEstablishmentsAccounts')->name('establishments.get_establishments_accounts');
+    Route::get('get_establishments_types', 'EstablishmentController@getEstablishmentTypeIndex');
+    Route::get('get_establishments_types_list', 'EstablishmentController@getEstablishmentsTypes')->name('establishments.get_establishments_types');
     Route::get('/get_menus','MenusController@getMenusIndex');
     Route::get('/get_menus_list','MenusController@getMenus')->name('menus.get_menus_list');
 
