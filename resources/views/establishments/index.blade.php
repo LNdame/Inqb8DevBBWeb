@@ -16,11 +16,11 @@
                         <th>Name</th>
                         <th>Address</th>
                         <th>Liqour License</th>
-                        <th>HS License</th>
+                        <th>Longitude</th>
+                        <th>Latitude</th>
                         <th>Last Inspection Date</th>
                         <th>Contact Person</th>
                         <th>Contact Number</th>
-                        <th>Status</th>
                         <th>Action</th>
                     </tr>
                     </thead>
@@ -43,11 +43,12 @@
                         {data: 'name', name: 'name'},
                         {data: 'address', name: 'address'},
                         {data: 'liqour_license', name: 'liqour_license'},
-                        {data: 'hs_license', name: 'hs_license'},
+                        {data: 'longitude', name: 'longitude'},
+                        {data: 'latitude', name: 'latitude'},
                         {data: 'last_inspection_date', name: 'last_inspection_date'},
                         {data: 'contact_person', name: 'contact_person'},
                         {data: 'contact_number', name: 'contact_number'},
-                        {data: 'status', name: 'status'},
+
                         {data:'action',name:'action',orderable:false,searchable:false}
                     ],
                     buttons:[

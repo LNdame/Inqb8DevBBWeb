@@ -12,15 +12,18 @@ use Illuminate\Http\Request;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-Route::get('get_user/{user}', 'UsersController@GetUser');
-Route::get('store_user/{user}', 'UsersController@Store');
+Route::get('get_beer_lover/{firebase_id}', 'UsersController@GetBeerLover');
+Route::get('get_beer_lovers', 'UsersController@GetBeerLovers');
+Route::post('store_beer_lover/', 'UsersController@SaveBeerLoverApi');
+Route::post('edit_beer_lover/{firebase_id}/', 'UsersController@EditBeerLoverApi');
+//Route::post('store_beer_lover/', 'UsersController@Save');
 
 Route::get('get_users', 'UsersController@apiUsers');
 Route::put('users/{user}', 'UsersController@update');
 Route::delete('users/{user}', 'UsersController@delete');
 
 Route::get('/get_establishments','EstablishmentController@getEstablishmentsApi');
-Route::get('/get_establishments/{establishment}','EstablishmentController@getEstablishmentApi');
+Route::get('/get_establishment/{establishment}', 'EstablishmentController@getEstablishmentApi');
 
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
