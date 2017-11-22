@@ -25,6 +25,11 @@ Route::delete('users/{user}', 'UsersController@delete');
 Route::get('/get_establishments','EstablishmentController@getEstablishmentsApi');
 Route::get('/get_establishment/{establishment}', 'EstablishmentController@getEstablishmentApi');
 
+Route::get('get_promotions', 'PromotionsController@apiPromotions');
+Route::get('get_promotion/{id}', 'PromotionsController@apiPromotion');
+
+Route::get('get_beers', 'BeersController@apiBeers');
+Route::get('get_beer/{beer}', 'BeersController@apiBeer');
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();

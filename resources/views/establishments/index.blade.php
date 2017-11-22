@@ -47,26 +47,11 @@
                         {data: 'contact_person', name: 'contact_person'},
                         {data: 'contact_number', name: 'contact_number'},
                         {data:'action',name:'action',orderable:false,searchable:false}
-                    ],
-                    buttons:[
-                        {
-                            text:'Add',
-                            action:function(e,dt, node, config){
-                             alert('ndeip');
-                            }
-                        }
                     ]
                 });
             });
         });
-        var table = $('#myTable').DataTable();
 
-        table.button().add( 0, {
-            action: function ( e, dt, button, config ) {
-                dt.ajax.reload();
-            },
-            text: 'Reload table'
-        } );
     </script>
 
 @endpush

@@ -41,6 +41,8 @@
                     <li><i class='fa-money'></i><a href="get_establishments_accounts">Establishment Accounts</a></li>
                 </ul>
             </li>
+            <li class="#"><a href="get_beers"><i class='fa fa-users'></i> <span style="cursor:pointer;">Beers</span></a>
+            </li>
             <li class="#"><a href="get_menus"><i class='fa fa-users'></i> <span style="cursor:pointer;">Menus</span></a></li>
             <li class="#"><a href="get_promotions"><i class='fa fa-hourglass-start'></i> <span style="cursor:pointer;">Promotions</span></a></li>
             <hr/>
