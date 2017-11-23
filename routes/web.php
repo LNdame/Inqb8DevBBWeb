@@ -44,12 +44,18 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/get_promotions_list','PromotionsController@getPromotions')->name('promotions.get_promotions');
     Route::get('/create_promotion', 'PromotionsController@createPromotions');
     Route::post('/save_promotion', 'PromotionsController@savePromotion');
+    Route::post('/update_promotion/{promotion}', 'PromotionsController@updatePromotion');
+    Route::get('/edit_promotion/{promotion}', 'PromotionsController@editPromotion');
+    Route::get('/view_promotion/{promotion}', 'PromotionsController@viewPromotion');
+    Route::get('/delete_promotion/{promotion}', 'PromotionsController@deletePromotion');
+
 
     Route::get('/get_beers', 'BeersController@index');
-    Route::get('/view_beer/{id}', 'BeersController@show');
-    Route::get('/edit_beer/{id}', 'BeersController@edit');
-    Route::get('/delete_beer/{id}', 'BeersController@destroy');
+    Route::get('/view_beer/{beer}', 'BeersController@show');
+    Route::get('/edit_beer/{beer}', 'BeersController@edit');
+    Route::get('/delete_beer/{beer}', 'BeersController@destroy');
     Route::post('/save_beer', 'BeersController@store');
+    Route::post('/update_beer/{beer}', 'BeersController@update');
     Route::get('/create_beer', 'BeersController@create');
     Route::get('/get_beers_datatable', 'BeersController@getBeers')->name('beers.get_beers_list');
 

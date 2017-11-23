@@ -87,14 +87,27 @@
                                        type="text" placeholder="Establishment URL">
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col-md-6 form-group">
-                                <label for="status">Status</label>
-                                <input id="status" name="status" class="form-control" type="text"
-                                       value="{{$establishment->status}}"
-                                       placeholder="Establishment Status">
-                            </div>
+                        {{--<div class="row">--}}
+                        {{--<div class="col-md-6 form-group">--}}
+                        {{--<label for="status">Status</label>--}}
+                        {{--<input id="status" name="status" class="form-control" type="text"--}}
+                        {{--value="{{$establishment->status}}"--}}
+                        {{--placeholder="Establishment Status">--}}
+                        {{--</div>--}}
 
+                        {{--</div>--}}
+
+                        <div class="col-md-6 form-group">
+                            <label for="status">Status</label>
+                            <select id="status" name="status" class="form-control">
+                                @if('active'==$establishment->status)
+                                    <option value="active" selected>Active</option>
+                                    <option value="inactive">InActive</option>
+                                @else
+                                    <option value="inactive" selected>InActive</option>
+                                    <option value="active">Active</option>
+                                @endif
+                            </select>
                         </div>
 
 

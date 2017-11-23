@@ -87,14 +87,14 @@
                                        type="text" placeholder="Establishment URL">
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col-md-6 form-group">
-                                <label for="status">Status</label>
-                                <input id="status" name="status" class="form-control" type="text"
-                                       value=""
-                                       placeholder="Establishment Status">
-                            </div>
 
+                        <div class="row">
+
+                            <div class="col-md-6 form-group">
+                                <label for="establishment_url">Status</label>
+                                <input id="establishment_url" name="establishment_url" class="form-control"
+                                       value="{{$establishment->status}}">
+                            </div>
                         </div>
 
 

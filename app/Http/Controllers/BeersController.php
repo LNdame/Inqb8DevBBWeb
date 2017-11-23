@@ -71,7 +71,7 @@ class BeersController extends Controller
      */
     public function show(Beer $beer)
     {
-        //
+        return view('beers.view_beer', compact('beer'));
     }
 
     /**
@@ -82,7 +82,7 @@ class BeersController extends Controller
      */
     public function edit(Beer $beer)
     {
-        //
+        return view('beers.edit_beer', compact('beer'));
     }
 
     /**
@@ -94,7 +94,8 @@ class BeersController extends Controller
      */
     public function update(Request $request, Beer $beer)
     {
-        //
+        $beer->update($request->all());
+        return redirect('get_beers');
     }
 
     /**

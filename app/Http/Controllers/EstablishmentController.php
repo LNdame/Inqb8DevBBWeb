@@ -59,7 +59,9 @@ class EstablishmentController extends Controller
         $establishments = DB::table('establishments')->select('*');
         return DataTables::of($establishments)
             ->addColumn('action',function($establishment){
-                return '<a href="view_establishment/'.$establishment->id.'" title="View Establishment" class="btn btn-xs btn-success"><i class="glyphicon glyphicon-eye-open"></i></a><a href="edit_establishment/'.$establishment->id.'" style="margin-left:0.5em" title="Edit Establishment" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i></a><a href="delete_establishment/'.$establishment->id.'" style="margin-left:0.5em" class="btn btn-xs btn-danger" title="Edit Establishment"><i class="glyphicon glyphicon-trash "></i></a>';
+                return '<a href="view_establishment/' . $establishment->id . '" style="margin-top:1em;"
+            title="View Establishment" class="btn btn-xs btn-success"><i class="glyphicon glyphicon-eye-open"></i>
+            </a><a href="edit_establishment/' . $establishment->id . '" style="margin-left:0.5em;margin-top: 1em;" title="Edit Establishment" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i></a>';
             })
             ->make(true);
     }
@@ -73,6 +75,7 @@ class EstablishmentController extends Controller
         DB::beginTransaction();
         try {
             $input = $request->all();
+//            dd($input);
             $main_picture_url = $request->file('main_picture_url');
             $picture_2 = $request->file('picture_2');
             $picture_3 = $request->file('picture_3');

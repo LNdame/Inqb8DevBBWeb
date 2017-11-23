@@ -9,4 +9,10 @@ class Promotion extends Model
     protected $fillable = [
         'title', 'start_date', 'end_date', 'status', 'price', 'establishment_id', 'beer_id'
     ];
+
+    public function establishment()
+    {
+        return $this->belongsTo('App\Establishment');
+    }
+
 }

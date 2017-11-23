@@ -80,8 +80,10 @@
                         <div class="row">
                             <div class="col-md-6 form-group">
                                 <label for="status">Status</label>
-                                <input id="status" name="status" class="form-control" type="text"
-                                       placeholder="Establishment Status">
+                                <select id="status" name="status" class="form-control">
+                                    <option value="active">Active</option>
+                                    <option value="inactive">InActive</option>
+                                </select>
                             </div>
                             <div class="col-md-6 form-group">
                                 <label for="main_picture_url">Main Picture</label>

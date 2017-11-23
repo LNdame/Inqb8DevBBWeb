@@ -12,7 +12,7 @@
                 <table class="table table-bordered" id="promotions-table" style="width:100%;">
                     <thead>
                     <tr>
-                        <th>ID</th>
+
                         <th>Title</th>
                         <th>Beer</th>
                         <th>Establishment</th>
@@ -20,6 +20,7 @@
                         <th>End Date</th>
                         <th>Status</th>
                         <th>Price</th>
+                        <th>Action</th>
                     </tr>
                     </thead>
                 </table>
@@ -38,15 +39,15 @@
                     serverSide: true,
                     ajax: "{{route('promotions.get_promotions')}}",
                     columns: [
-                        {data: 'id', 'name': 'id'},
+
                         {data: 'title', name: 'title'},
-                        {data: 'beer_id', name: 'beer_id'},
-                        {data: 'establishment_id', name: 'establishment_id'},
+                        {data: 'beer_name', name: 'beers.name'},
+                        {data: 'est_name', name: 'establishments.name'},
                         {data: 'start_date', name: 'start_date'},
                         {data: 'end_date', name: 'end_date'},
                         {data: 'status', name: 'status'},
                         {data: 'price', name: 'price'},
-//                        {data:'action',name:'action',orderable:false,searchable:false}
+                        {data: 'action', name: 'action', orderable: false, searchable: false}
                     ]
                 });
             });

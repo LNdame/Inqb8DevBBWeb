@@ -17,9 +17,10 @@
                         <th>Address</th>
                         <th>Longitude</th>
                         <th>Latitude</th>
-                        <th>Main Pic Url</th>
+
                         <th>Contact Person</th>
                         <th>Contact Number</th>
+                        <th>Status</th>
                         <th>Action</th>
                     </tr>
                     </thead>
@@ -43,9 +44,10 @@
                         {data: 'address', name: 'address'},
                         {data: 'longitude', name: 'longitude'},
                         {data: 'latitude', name: 'latitude'},
-                        {data: 'main_picture_url', name: 'main_picture_url'},
+//                        {data: 'main_picture_url', name: 'main_picture_url'},
                         {data: 'contact_person', name: 'contact_person'},
                         {data: 'contact_number', name: 'contact_number'},
+                        {data: 'status', name: 'status'},
                         {data:'action',name:'action',orderable:false,searchable:false}
                     ]
                 });

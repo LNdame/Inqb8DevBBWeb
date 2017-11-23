@@ -16,10 +16,45 @@ class PromotionsController extends Controller
     }
 
     public function getPromotions(){
-        $promotions = DB::table('promotions')->select('*');
-        return DataTables::of($promotions)->make(true);
+        $promotions = DB::table('promotions')
+            ->join('establishments', 'establishments.id', 'promotions.establishment_id')
+            ->join('beers', 'beers.id', 'promotions.beer_id')
+            ->select('title', 'promotions.id', 'start_date', 'end_date', 'promotions.status', 'promotions.price', 'beers.name as beer_name', 'establishments.name as est_name');
+        return DataTables::of($promotions)
+            ->addColumn('action', function ($promotion) {
+                return '<a href="view_promotion/' . $promotion->id . '" style="margin-top:1em;"
+            title="View Promo" class="btn btn-xs btn-success"><i class="glyphicon glyphicon-eye-open"></i>
+            </a><a href="edit_promotion/' . $promotion->id . '" style="margin-left:0.5em;margin-top: 1em;" title="Edit Promo" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i></a><a href="delete_promotion/' . $promotion->id . '"  style="margin-left:0.5em;margin-top: 1em;" class="btn btn-xs btn-danger" title="Edit Promo"><i class="glyphicon glyphicon-trash "></i></a>';
+            })->make(true);
     }
 
+    public function editPromotion(Promotion $promotion)
+    {
+//        dd($promotion);
+        $establishments = Establishment::all();
+        $beers = Beer::all();
+        return view('promotions.edit_promotion', compact('promotion', 'establishments', 'beers'));
+    }
+
+    public function updatePromotion(Request $request, Promotion $promotion)
+    {
+        $promotion->update($request->all());
+        return redirect('get_promotions');
+    }
+
+    public function deletePromotion(Promotion $promotion)
+    {
+        $promotion->delete();
+        return redirect('get_promotions');
+    }
+
+    public function viewPromotion(Promotion $promotion)
+    {
+        $establishments = Establishment::all();
+        $beers = Beer::all();
+        return view('promotions.view_promotion', compact('establishments', 'beers', 'promotion'));
+
+    }
     public function createPromotions()
     {
         $establishments = Establishment::all();

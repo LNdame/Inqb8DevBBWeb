@@ -37,7 +37,7 @@
                     {{--</div>--}}
                     <div class="form-group has-feedback">
                         <input type="password" class="form-control" placeholder="{{ trans('adminlte_lang::message.password') }}" name="password"/>
-                        <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+                        {{--<span class="glyphicon glyphicon-lock form-control-feedback"></span>--}}
                     </div>
                     <div class="row">
                         <div class="col-xs-8">
