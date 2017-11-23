@@ -34,8 +34,13 @@ class PromotionsController extends Controller
 
     public function apiPromotion($establishment_id)
     {
-        $promotion = Promotion::where('establishment_id', $establishment_id)->first();
-        return $promotion;
+        $promotion = Promotion::where('establishment_id', $establishment_id)->get();
+        if ($promotion != null) {
+            return $promotion;
+        } else {
+            return [];
+        }
+
     }
 
     public function savePromotion(Request $request)

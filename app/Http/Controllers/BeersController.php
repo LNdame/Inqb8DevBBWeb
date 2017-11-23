@@ -110,11 +110,16 @@ class BeersController extends Controller
 
     public function apiBeers()
     {
+//        dd(Beer::all());
         return Beer::all();
     }
 
-    public function apiBeer(Beer $beer)
+    public function apiBeer($beer)
     {
-        return $beer;
+        $beer_drink = Beer::where('id', $beer)->get();
+        if ($beer_drink != null) {
+            return $beer_drink;
+        }
+        return [];
     }
 }

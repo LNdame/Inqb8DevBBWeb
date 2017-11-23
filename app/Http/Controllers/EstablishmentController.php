@@ -138,8 +138,14 @@ class EstablishmentController extends Controller
         return $establishments;
     }
 
-    public function getEstablishmentApi(Establishment $establishment){
-        return $establishment;
+    public function getEstablishmentApi($establishment)
+    {
+        $est = Establishment::where('id', $establishment)->get();
+        if ($est != null) {
+            return $est;
+        }
+        return [];
+
     }
 
     public function getEstablishmentAccountIndex(){
