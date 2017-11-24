@@ -64,17 +64,22 @@ class PromotionsController extends Controller
 
     public function apiPromotions()
     {
-        return Promotion::all();
+        $promotions = DB::table('promotions')
+            ->join('establishments', 'establishments.id', 'promotions.establishment_id')
+            ->join('beers', 'beers.id', 'promotions.beer_id')
+            ->select('title', 'promotions.id', 'start_date', 'end_date', 'promotions.beer_id', 'promotions.establishment_id', 'promotions.status', 'promotions.price', 'beers.name as beer_name', 'establishments.name as establishment_name')->get();
+//        dd($promotions);
+        return response()->json($promotions);
     }
 
     public function apiPromotion($establishment_id)
     {
-        $promotion = Promotion::where('establishment_id', $establishment_id)->get();
-        if ($promotion != null) {
-            return $promotion;
-        } else {
-            return [];
-        }
+        $promotion = Promotion::join('establishments', 'establishments.id', 'promotions.establishment_id')
+            ->join('beers', 'beers.id', 'promotions.beer_id')
+            ->where('establishment_id', $establishment_id)
+            ->select('title', 'promotions.id', 'start_date', 'end_date', 'promotions.beer_id', 'promotions.establishment_id', 'promotions.status', 'promotions.price', 'beers.name as beer_name', 'establishments.name as establishment_name')->get();
+//
+        return response()->json($promotion);
 
     }
 
