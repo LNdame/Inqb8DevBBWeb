@@ -16,7 +16,13 @@ Route::get('get_beer_lover/{firebase_id}', 'UsersController@GetBeerLover');
 Route::get('get_beer_lovers', 'UsersController@GetBeerLovers');
 Route::post('store_beer_lover/', 'UsersController@SaveBeerLoverApi');
 Route::post('edit_beer_lover/{firebase_id}/', 'UsersController@EditBeerLoverApi');
-//Route::post('store_beer_lover/', 'UsersController@Save');
+
+Route::post('store_preference/', 'UsersController@storePreferences');
+Route::post('edit_preferences/{firebase_id}/', 'UsersController@editPreferences');
+Route::get('get_preferences/{firebase_id}', 'UsersController@getPreferences');
+
+Route::post('store_discount/', 'UsersController@storeDiscount');
+Route::get('get_discounts/{firebase_id}', 'UsersController@getDiscounts');
 
 Route::get('get_users', 'UsersController@apiUsers');
 Route::put('users/{user}', 'UsersController@update');

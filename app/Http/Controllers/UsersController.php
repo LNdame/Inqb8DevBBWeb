@@ -2,9 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Beer;
 use App\BeerLover;
+use App\Discount;
+use App\Preference;
 use Illuminate\Http\Request;
 use App\User;
+//use App\Discount;
 
 use DB;
 use Yajra\Datatables\Datatables;
@@ -158,6 +162,85 @@ class UsersController extends Controller
             return response()->json($beer_lover, 201);
         } catch (\Exception $e) {
             return response()->json($e, 400);
+        }
+    }
+
+    public function storePreferences(Request $request)
+    {
+//        dd($request->all());
+        DB::beginTransaction();
+        try {
+            $input = $request->all();
+            $user = BeerLover::where('firebase_id', $input['firebase_id'])->first();
+            $input['beer_lover_id'] = $user->id;
+            $preference = Preference::create($input);
+            DB::commit();
+//            $preference =
+            return response()->json($preference, 201);
+        } catch (\Exception $e) {
+            DB::rollback();
+            return response()->json([], 400);
+//            throw $e;
+        }
+
+    }
+
+    public function storeDiscount(Request $request)
+    {
+//        dd($request->all());
+        DB::beginTransaction();
+        try {
+            $input = $request->all();
+            $user = BeerLover::where('firebase_id', $input['firebase_id'])->first();
+            $input['beer_lover_id'] = $user->id;
+            $discount = Discount::create($input);
+//            dd($discount);
+            DB::commit();
+            return response()->json($discount, 201);
+        } catch (\Exception $e) {
+            DB::rollback();
+            return response()->json([], 400);
+//            throw $e;
+        }
+    }
+
+    public function getDiscounts($firebase_id)
+    {
+        $user = BeerLover::where('firebase_id', $firebase_id)->first();
+        $preferences = Discount::join('establishments', 'establishments.id', 'discounts.establishment_id')
+            ->where('beer_lover_id', $user->id)->select('discounts.id', 'discounts.establishment_id', 'establishments.name', 'establishments.created_at')->get();
+        return response()->json($preferences, 201);
+    }
+
+    public function getPreferences($firebase_id)
+    {
+        $user = BeerLover::where('firebase_id', $firebase_id)->first();
+        $preferences = Preference::join('beers', 'beers.id', 'preferences.beer_id')
+            ->where('beer_lover_id', $user->id)->select('preferences.*', 'beers.name', 'beers.vendor')->get();
+        return response()->json($preferences, 201);
+    }
+
+    public function editPreferences(Request $request, $firebase_id)
+    {
+//        dd($request);
+        $input = $request->all();
+//        dd($firebase_id);
+        DB::beginTransaction();
+        try {
+            $user = BeerLover::where('firebase_id', $firebase_id)->first();
+            $preference_del = Preference::where('beer_lover_id', $user->id)->delete();
+//            dd($preference_del);
+            $preference = Preference::create(['beer_lover_id' => $user->id, 'beer_id' => $input['preference_1']]);
+            $preference_1 = Preference::create(['beer_lover_id' => $user->id, 'beer_id' => $input['preference_2']]);
+            $preference_2 = Preference::create(['beer_lover_id' => $user->id, 'beer_id' => $input['preference_3']]);
+//            dd($preference);
+            DB::commit();
+            $preferences = Preference::where('beer_lover_id', $user->id)->get();
+            return response()->json($preferences, 201);
+
+        } catch (\Exception $e) {
+            DB::rollback();
+            return response()->json([], 400);
         }
     }
 
