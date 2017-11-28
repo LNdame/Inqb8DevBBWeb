@@ -216,7 +216,7 @@ class UsersController extends Controller
     {
         $user = BeerLover::where('firebase_id', $firebase_id)->first();
         $preferences = Preference::join('beers', 'beers.id', 'preferences.beer_id')
-            ->where('beer_lover_id', $user->id)->select('preferences.*', 'beers.name', 'beers.vendor')->get();
+            ->where('beer_lover_id', $user->id)->select('preferences.*', 'beers.name', 'beers.vendor', 'preferences.preference_number')->get();
         return response()->json($preferences, 201);
     }
 
