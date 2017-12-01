@@ -222,23 +222,23 @@ class UsersController extends Controller
 
     public function editPreferences(Request $request, $firebase_id)
     {
-//        dd($request);
+//
         $input = $request->all();
-//        dd($firebase_id);
         DB::beginTransaction();
         try {
             $user = BeerLover::where('firebase_id', $firebase_id)->first();
             $preference_del = Preference::where('beer_lover_id', $user->id)->delete();
 //            dd($preference_del);
-            $preference = Preference::create(['beer_lover_id' => $user->id, 'beer_id' => $input['preference_1']]);
-            $preference_1 = Preference::create(['beer_lover_id' => $user->id, 'beer_id' => $input['preference_2']]);
-            $preference_2 = Preference::create(['beer_lover_id' => $user->id, 'beer_id' => $input['preference_3']]);
-//            dd($preference);
+            $preference = Preference::create(['beer_lover_id' => $user->id, 'beer_id' => $input['preference_1'], 'preference_number' => 1]);
+            $preference_1 = Preference::create(['beer_lover_id' => $user->id, 'beer_id' => $input['preference_2'], 'preference_number' => 2]);
+            $preference_2 = Preference::create(['beer_lover_id' => $user->id, 'beer_id' => $input['preference_3'], 'preference_number' => 3]);
+//
             DB::commit();
             $preferences = Preference::where('beer_lover_id', $user->id)->get();
-            return response()->json($preferences, 201);
+            return response()->json($preferences, 200);
 
         } catch (\Exception $e) {
+            throw $e;
             DB::rollback();
             return response()->json([], 400);
         }
