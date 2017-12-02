@@ -6,9 +6,11 @@ use App\Beer;
 use App\BeerLover;
 use App\Discount;
 use App\Preference;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\User;
 //use App\Discount;
+
 
 use DB;
 use Yajra\Datatables\Datatables;
@@ -114,6 +116,7 @@ class UsersController extends Controller
             $beer_lover_account['gender'] = $input['gender'];
             $beer_lover_account['home_city'] = $input['home_city'];
             $beer_lover_account['referal_code'] = $input['referal_code'];
+            $beer_lover_account['invitation_code'] = $input['invitation_code'];
             $beer_lover_account['firebase_id'] = $input['firebase_id'];
             $beer_lover_account['cocktail'] = $input['cocktail'];
             $beer_lover_account['cocktail_type'] = $input['cocktail_type'];
@@ -121,6 +124,7 @@ class UsersController extends Controller
             $beer_lover_account['shot_type'] = $input['shot_type'];
 
             $beer_lover = BeerLover::create($beer_lover_account);
+//            dd($beer_lover);
             DB::commit();
             return response()->json($beer_lover, 201);
         }catch(\Exception $e){
@@ -208,7 +212,9 @@ class UsersController extends Controller
     {
         $user = BeerLover::where('firebase_id', $firebase_id)->first();
         $preferences = Discount::join('establishments', 'establishments.id', 'discounts.establishment_id')
-            ->where('beer_lover_id', $user->id)->select('discounts.id', 'discounts.establishment_id', 'establishments.name', 'establishments.created_at')->get();
+            ->where('beer_lover_id', $user->id)
+            ->where('discounts.created_at', '>=', Carbon::now()->subHours(12))
+            ->select('discounts.id', 'discounts.establishment_id', 'establishments.name', 'discounts.created_at')->get();
         return response()->json($preferences, 201);
     }
 
