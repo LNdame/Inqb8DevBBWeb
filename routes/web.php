@@ -41,14 +41,29 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/get_menus_list','MenusController@getMenus')->name('menus.get_menus_list');
 
     Route::get('/get_promotions','PromotionsController@getPromotionsIndex');
+    Route::get('/get_establishment_promotions', 'PromotionsController@getEstablishmentPromotionsIndex');
+    Route::get('/get_establishment_promotions', 'PromotionsController@getEstablishmentPromotionsIndex');
     Route::get('/get_promotions_list','PromotionsController@getPromotions')->name('promotions.get_promotions');
-    Route::get('/create_promotion', 'PromotionsController@createPromotions');
-    Route::post('/save_promotion', 'PromotionsController@savePromotion');
-    Route::post('/update_promotion/{promotion}', 'PromotionsController@updatePromotion');
-    Route::get('/edit_promotion/{promotion}', 'PromotionsController@editPromotion');
-    Route::get('/view_promotion/{promotion}', 'PromotionsController@viewPromotion');
-    Route::get('/delete_promotion/{promotion}', 'PromotionsController@deletePromotion');
+    Route::get('/get_promotions_list_promo_theirs', 'PromotionsController@getEstablishmentPromotions')->name('promotions.get_establishment_promotions_promo_theirs');
+    //Events
 
+    Route::get('/get_events_list', 'EventsController@getEstablishmentEvents')->name('events.get_establishment_events');
+    Route::get('get_establishment_events', 'EventsController@getEstEvents');
+    Route::get('delete_establishment_event/{event}', 'Events@deleteEstablishmentEvent');
+//    Route::get('/get_promotions_list_promo','PromotionsController@getEstablishmentPromotions')->name('promotions.get_establishment_promotions_promo');
+    Route::get('/create_promotion', 'PromotionsController@createPromotions');
+    Route::get('/create_establishment_promotion', 'PromotionsController@createEstablishmentPromotions');
+    Route::get('/create_establishment_event', 'EventsController@createEstablishmentEvent');
+    Route::post('/save_promotion', 'PromotionsController@savePromotion');
+    Route::post('/save_establishment_promotion', 'PromotionsController@saveEstablishmentPromotion');
+    Route::post('/update_promotion/{promotion}', 'PromotionsController@updatePromotion');
+    Route::post('/update_establishment_promotion/{promotion}', 'PromotionsController@updateEstablishmentPromotion');
+    Route::get('/edit_promotion/{promotion}', 'PromotionsController@editPromotion');
+    Route::get('/edit_establishment_promotion/{promotion}', 'PromotionsController@editEstablishmentPromotion');
+    Route::get('/view_promotion/{promotion}', 'PromotionsController@viewPromotion');
+    Route::get('/view_establishment_promotion/{promotion}', 'PromotionsController@viewEstablishmentPromotion');
+    Route::get('/delete_promotion/{promotion}', 'PromotionsController@deletePromotion');
+    Route::get('/delete_establishment_promotion/{promotion}', 'PromotionsController@deleteEstablishmentPromotion');
 
     Route::get('/get_beers', 'BeersController@index');
     Route::get('/view_beer/{beer}', 'BeersController@show');
@@ -61,6 +76,12 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('/get_beer_lovers','BeerLoversController@getBeerLoversIndex');
     Route::get('/get_beer_lovers_list','BeerLoversController@getBeerLovers')->name('users.get_beer_lovers');
+
+    Route::get('/edit_establishment_event/{event}', 'EventsController@editEstablishmentEvent');
+    Route::get('/view_establishment_events/{event}', 'EventsController@viewEstablishmentEvent');
+    Route::get('delete_establishment_event', 'EventsController@deleteEstablishmentEvent');
+    Route::post('save_establishment_event', 'EventsController@saveEstablishmentEvent');
+    Route::post('update_establishment_event/{event}', 'EventsController@updateEstablishmentEvent');
     //    Route::get('/link1', function ()    {
 //        // Uses Auth Middleware
 //    });

@@ -1,4 +1,4 @@
-@extends('adminlte::layouts.app')
+@extends('adminlte::layouts.establishments')
 
 @section('main-content')
     <div class="container-fluid">
@@ -7,7 +7,8 @@
                 <div class="box-header with-border">
                     <h3 class="box-title">Add Promotion</h3>
                 </div>
-                <form role="form" id="add-establishment" enctype="multipart/form-data" action="/save_promotion"
+                <form role="form" id="add-establishment" enctype="multipart/form-data"
+                      action="/save_establishment_promotion"
                       method="post">
                     {{ csrf_field() }}
                     <div class="box-body">
@@ -15,16 +16,13 @@
 
                             <div class="col-md-6 form-group">
                                 <label for="name">Promotion Title</label>
-                                <input id="title" name="title" class="form-control" type="text"
+                                <input id="title" name="title" class="form-control" type="text" required
                                        placeholder="Promotion Title">
                             </div>
                             <div class="col-md-6 form-group">
                                 <label for="address">Establishment</label>
                                 <select id="establishment_id" name="establishment_id" class="form-control">
-
-                                    @foreach($establishments as $establishment)
-                                        <option value="{{$establishment->id}}">{{$establishment->name}}</option>
-                                    @endforeach
+                                    <option value="{{$establishment->id}}">{{$establishment->name}}</option>
                                 </select>
 
                             </div>
@@ -34,6 +32,7 @@
                                 <label for="start_date">Start DateTime</label>
                                 <div class='input-group'>
                                     <input id="datetimepicker1" name="start_date" type='text' class="form-control"
+                                           required
                                            value=""/>
                                     <span class="input-group-addon"><span
                                                 class="glyphicon glyphicon-calendar"></span></span>
@@ -44,6 +43,7 @@
                                 <label for="end_date">End DateTime</label>
                                 <div class='input-group' id=''>
                                     <input id="datetimepicker2" name="end_date" type='text' class="form-control"
+                                           required
                                            value=""/>
                                     <span class="input-group-addon"><span
                                                 class="glyphicon glyphicon-calendar"></span></span>
@@ -56,7 +56,7 @@
 
                             <div class="col-md-6 form-group">
                                 <label for="price">Beer</label>
-                                <select id="beer_id" name="beer_id" class="form-control">
+                                <select id="beer_id" name="beer_id" class="form-control" required>
 
                                     @foreach($beers as $beer)
                                         <option value="{{$beer->id}}">{{$beer->name}}</option>
@@ -73,7 +73,7 @@
                         <div class="row">
                             <div class="col-md-6 form-group">
                                 <label for="status">Status</label>
-                                <select id="status" name="status" class="form-control">
+                                <select id="status" name="status" class="form-control" required>
                                     <option value="active">Active</option>
                                     <option value="inactive">InActive</option>
                                 </select>

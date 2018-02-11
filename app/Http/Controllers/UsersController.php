@@ -107,10 +107,11 @@ class UsersController extends Controller
             $user_accoount['email'] = $input['email'];
             $user_accoount['username'] = $input['username'];
             $user_accoount['password'] = bcrypt('123456');
+            $user_accoount['role'] = "3";
             $user = User::create($user_accoount);
 
             $beer_lover_account['user_id'] = $user->id;
-            $beer_lover_account['status'] = $input['status'];
+            $beer_lover_account['status'] = "active";
             $beer_lover_account['date_of_birth'] = $input['date_of_birth'];
             $beer_lover_account['terms_conditions_accept'] = $input['terms_conditions_accept'];
             $beer_lover_account['gender'] = $input['gender'];
@@ -143,28 +144,12 @@ class UsersController extends Controller
         try {
 //            dd($request->all());
             $input = $request->all();
-            $user->first_name = $input['first_name'];
-            $user->last_name = $input['last_name'];
-//            $user->email = $input['email'];
-            $user->username = $input['username'];
-//            $user_accoount['password'] = bcrypt('123456');
-            $users = $user->save();
-//            dd($users);
-            $beer_lover_account['status'] = $input['status'];
-//            dd($beer_lover_account);
-            $beer_lover->date_of_birth = $input['date_of_birth'];
-            $beer_lover->terms_conditions_accept = $input['terms_conditions_accept'];
-            $beer_lover->gender = $input['gender'];
-            $beer_lover->home_city = $input['home_city'];
-            $beer_lover->cocktail = $input['cocktail'];
-            $beer_lover->cocktail_type = $input['cocktail_type'];
-            $beer_lover->shot = $input['shot'];
-            $beer_lover->shot_type = $input['shot_type'];
-            $beer_lover->save();
-
+            $user->update($input);
+            $beer_lover->update($request->all());
             DB::commit();
             return response()->json($beer_lover, 201);
         } catch (\Exception $e) {
+            throw $e;
             return response()->json($e, 400);
         }
     }

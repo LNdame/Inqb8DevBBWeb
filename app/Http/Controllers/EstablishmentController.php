@@ -8,6 +8,7 @@ use Yajra\Datatables\Datatables;
 use App\Establishment;
 use Image;
 use File;
+use App\User;
 
 class EstablishmentController extends Controller
 {
@@ -47,6 +48,13 @@ class EstablishmentController extends Controller
             $input['picture_3'] = $path_3;
             $establishment = Establishment::create($input);
 //            dd($establishment);
+            $user_accoount['first_name'] = $input['name'];
+            $user_accoount['last_name'] = $input['name'];
+            $user_accoount['email'] = $input['user_name'];
+            $user_accoount['username'] = $input['user_name'];
+            $user_accoount['password'] = bcrypt($input['password']);
+            $user_accoount['role'] = "2";
+            $user = User::create($user_accoount);
            DB::commit();
 //           return redirect('/get_establishments');
         }catch(\Exception $e){
@@ -133,11 +141,12 @@ class EstablishmentController extends Controller
     }
 
     public function ViewEstablishment(Establishment $establishment){
+//        dd($establishment);
         return view('establishments.view_establishment', compact('establishment'));
     }
 
     public function getEstablishmentsApi(){
-        $establishments = Establishment::all();
+        $establishments = Establishment::where('status', 'active')->get();
         return $establishments;
     }
 

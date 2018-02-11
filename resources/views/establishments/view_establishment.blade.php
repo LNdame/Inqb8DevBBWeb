@@ -15,6 +15,16 @@
                         <div class="row">
 
                             <div class="col-md-6 form-group">
+                                <label for="name">Establishment Account Name</label>
+                                <input id="user_name" name="user_name" class="form-control"
+                                       placeholder="Establishment Account Name"
+                                       value="{{$establishment->user_name}}">
+
+                            </div>
+                        </div>
+                        <div class="row">
+
+                            <div class="col-md-6 form-group">
                                 <label for="name">Establishment Name</label>
                                 <input id="name" name="name" class="form-control" placeholder="Establishment Name"
                                        value="{{$establishment->name}}">

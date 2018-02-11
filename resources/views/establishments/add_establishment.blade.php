@@ -3,7 +3,7 @@
 
 @section('main-content')
     <div class="container-fluid">
-        <div class="col-md-10">
+        <div class="col-md-12">
             <div class="box box-primary">
                 <div class="box-header with-border">
                     <h3 class="box-title">Add Establishment</h3>
@@ -22,6 +22,19 @@
                                 <label for="address">Address</label>
                                 <input id="address" name="address" type="text" class="form-control"
                                        placeholder="Establishment Address">
+                            </div>
+                        </div>
+                        <div class="row">
+
+                            <div class="col-md-6 form-group">
+                                <label for="name">Account UserName</label>
+                                <input id="user_name" name="user_name" class="form-control"
+                                       placeholder="Account UserName">
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <label for="address">Password</label>
+                                <input id="password" name="password" type="text" class="form-control"
+                                       placeholder="Account Password">
                             </div>
                         </div>
                         <div class="row">
@@ -117,4 +130,18 @@
             </div>
         </div>
     </div>
+    <script>
+        $(document).ready(function () {
+            $("#name").blur(function () {
+                var establishment_name = $("#name").val();
+                establishment_name = establishment_name.toLowerCase();
+                var user_name = "";
+                establishment_name = establishment_name.replace(/ +/g, "") + "@beerlybeloved.co.za";
+                var randomstring = Math.random().toString(36).slice(-8);
+                $("#user_name").val(establishment_name);
+                $("#password").val(randomstring);
+            });
+        });
+
+    </script>
 @endsection
