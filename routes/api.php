@@ -31,6 +31,9 @@ Route::delete('users/{user}', 'UsersController@delete');
 Route::get('/get_establishments','EstablishmentController@getEstablishmentsApi');
 Route::get('/get_establishment/{establishment}', 'EstablishmentController@getEstablishmentApi');
 
+Route::get('/get_events', 'EventsController@getEventsApi');
+Route::get('/get_event/{event}', 'EventsController@getEventApi');
+
 Route::get('get_promotions', 'PromotionsController@apiPromotions');
 Route::get('get_promotion/{id}', 'PromotionsController@apiPromotion');
 

@@ -1,4 +1,4 @@
-@extends('adminlte::layouts.establishments')
+@extends('adminlte::layouts.app')
 
 @section('main-content')
     <div class="container-fluid">
@@ -18,13 +18,17 @@
                                 <input id="title" name="title" class="form-control" type="text" required
                                        placeholder="Event Title">
                             </div>
-                            <div class="col-md-6 form-group">
-                                <label for="address">Establishment Name</label>
-                                <select id="establishment_id" name="establishment_id" class="form-control">
-                                    <option value="{{$establishment->id}}">{{$establishment->name}}</option>
-                                </select>
+                            {{--<div class="col-md-6 form-group">--}}
+                            {{--<label for="address">Establishment Name</label>--}}
 
-                            </div>
+                            {{--<select id="establishment_id" name="establishment_id" class="form-control">--}}
+                            {{--<option value="0"> Select Establishment</option>--}}
+                            {{--@foreach($establishments as $establishment)--}}
+                            {{--<option value="{{$establishment->id}}">{{$establishment->name}}</option>--}}
+                            {{--@endforeach--}}
+
+                            {{--</select>--}}
+                            {{--</div>--}}
                         </div>
                         <div class="row">
                             <div class="form-group col-md-6">
@@ -104,7 +108,7 @@
                         <div class="row">
                             <div class="col-md-6 form-group">
                                 <label for="establishment_url">Event URL</label>
-                                <input id="event" name="event" class="form-control"
+                                <input id="event_url" name="event_url" class="form-control"
                                        type="text" placeholder="Establishment URL">
                             </div>
 

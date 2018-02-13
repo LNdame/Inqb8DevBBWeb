@@ -1,4 +1,4 @@
-@extends('adminlte::layouts.establishments')
+@extends('adminlte::layouts.app')
 
 @section('main-content')
     <div class="container-fluid">
@@ -18,13 +18,15 @@
                                 <input id="title" name="title" class="form-control" type="text"
                                        placeholder="Promotion Title" value="{{$event->title}}">
                             </div>
-                            <div class="col-md-6 form-group">
-                                <label for="address">Establishment Name</label>
-                                <select id="establishment_id" name="establishment_id" class="form-control">
-                                    <option value="{{$establishment->id}}">{{$establishment->name}}</option>
-
-                                </select>
-                            </div>
+                            {{--<div class="col-md-6 form-group">--}}
+                            {{--<label for="address">Establishment Name</label>--}}
+                            {{--<select id="establishment_id" name="establishment_id" class="form-control">--}}
+                            {{--<option> Select Establishment</option>--}}
+                            {{--@foreach($establishments as $establishment)--}}
+                            {{--<option value="{{$establishment->id}}">{{$establishment->name}}</option>--}}
+                            {{--@endforeach--}}
+                            {{--</select>--}}
+                            {{--</div>--}}
                         </div>
                         <div class="row">
                             <div class="form-group col-md-6">

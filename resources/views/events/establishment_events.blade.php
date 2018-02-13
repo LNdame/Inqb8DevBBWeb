@@ -1,4 +1,4 @@
-@extends('adminlte::layouts.establishments')
+@extends('adminlte::layouts.app')
 
 @section('main-content')
     <div class="container-fluid">
@@ -14,11 +14,11 @@
                     <thead>
                     <tr>
                         <th>Title</th>
-                        <th>Establishment</th>
                         <th>Start Date</th>
                         <th>End Date</th>
                         <th>Status</th>
                         <th>Description</th>
+                        <th>Address</th>
                         <th>Action</th>
                     </tr>
                     </thead>
@@ -39,11 +39,11 @@
                     ajax: "{{route('events.get_establishment_events')}}",
                     columns: [
                         {data: 'title', name: 'title'},
-                        {data: 'est_name', name: 'establishments.name'},
                         {data: 'start_date', name: 'start_date'},
                         {data: 'end_date', name: 'end_date'},
                         {data: 'status', name: 'status'},
                         {data: 'description', name: 'description'},
+                        {data: 'address', name: 'address'},
                         {data: 'action', name: 'action', orderable: false, searchable: false}
                     ]
                 });

@@ -49,8 +49,8 @@
             {{--style="cursor:pointer;">Menus</span></a></li>--}}
             <li class="#"><a href="{{url('get_establishment_promotions')}}"><i class='fa fa-hourglass-start'></i> <span
                             style="cursor:pointer;">Promotions</span></a></li>
-            <li class="#"><a href="{{url('get_establishment_events')}}"><i class='fa fa-users'></i> <span
-                            style="cursor:pointer;">Events</span></a></li>
+            {{--<li class="#"><a href="{{url('get_establishment_events')}}"><i class='fa fa-users'></i> <span--}}
+            {{--style="cursor:pointer;">Events</span></a></li>--}}
             <hr/>
             <li class="treeview">
                 <a><i class='fa fa-users'></i> <span style="cursor:pointer;">Account Management</span> <i

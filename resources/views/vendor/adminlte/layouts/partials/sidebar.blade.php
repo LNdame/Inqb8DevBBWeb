@@ -44,6 +44,8 @@
             <li class="#"><a href="{{url('get_beers')}}"><i class='fa fa-users'></i> <span
                             style="cursor:pointer;">Beers</span></a>
             </li>
+            <li class="#"><a href="{{url('get_establishment_events')}}"><i class='fa fa-users'></i> <span
+                            style="cursor:pointer;">Events</span></a></li>
             <li class="#"><a href="{{url('get_menus')}}"><i class='fa fa-users'></i> <span
                             style="cursor:pointer;">Menus</span></a></li>
             <li class="#"><a href="{{url('get_promotions')}}"><i class='fa fa-hourglass-start'></i> <span
