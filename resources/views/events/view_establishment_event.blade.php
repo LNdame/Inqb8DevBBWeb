@@ -126,6 +126,23 @@
                                 <img id="main_pic_preview" src="{{asset($event->main_picture_url)}}"
                                      width="200px" height="200px">
                             </div>
+
+                            <div class="col-md-6 form-group">
+                                <label for="picture_2">Second Picture</label><br/>
+                                <img id="pic_2_preview" src="{{asset($establishment->picture_2)}}" width="200px"
+                                     height="200px">
+                            </div>
+                        </div>
+
+                        <div class="row" style="margin-top:1em;">
+                            <div class="col-md-6 form-group">
+                                <label for="picture_3">Third Picture</label><br/>
+                                <div class="col-md-6">
+                                    <img id="pic_3_preview" src="{{asset($establishment->picture_3)}}" width="200px"
+                                         height="200px">
+                                </div>
+                            </div>
+
                         </div>
 
                     </div>

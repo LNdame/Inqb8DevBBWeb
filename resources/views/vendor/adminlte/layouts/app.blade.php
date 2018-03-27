@@ -35,8 +35,12 @@ desired effect
     <div class="wrapper">
 
     @include('adminlte::layouts.partials.mainheader')
-
-    @include('adminlte::layouts.partials.sidebar')
+        @role('Super Admin')
+        @include('adminlte::layouts.partials.sidebar')
+        @endrole
+        @role('Admin')
+        @include('adminlte::layouts.partials.admin_sidebar')
+        @endrole
 
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">

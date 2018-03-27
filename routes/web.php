@@ -82,6 +82,24 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('delete_establishment_event', 'EventsController@deleteEstablishmentEvent');
     Route::post('save_establishment_event', 'EventsController@saveEstablishmentEvent');
     Route::post('update_establishment_event/{event}', 'EventsController@updateEstablishmentEvent');
+
+    Route::get('/get_roles', 'RolesController@getRoles')->name('roles.get_roles');
+    Route::get('create_role', 'RolesController@createRole');
+    Route::post('/save_role', 'RolesController@saveRole');
+    Route::get('view_role/{role}', 'RolesController@viewRole');
+    Route::get('edit_role/{role}', 'RolesController@editRole');
+    Route::get('delete_role/{role}', 'RolesController@deleteRole');
+    Route::get('roles', 'RolesController@index');
+    Route::post('/update_role/{role}', 'RolesController@updateRole');
+
+    Route::get('/get_permissions', 'PermissionsController@getPermissions')->name('permissions.get_permissions');
+    Route::get('create_permission', 'PermissionsController@createPermission');
+    Route::post('/save_permission', 'PermissionsController@savePermission');
+    Route::get('view_permission/{permission}', 'PermissionsController@viewPermission');
+    Route::get('edit_permission/{permission}', 'PermissionsController@editPermission');
+    Route::get('delete_permission/{permission}', 'PermissionsController@deletePermission');
+    Route::get('permissions', 'PermissionsController@index');
+    Route::post('update_permission/{permission}', 'PermissionsController@updatePermission');
     //    Route::get('/link1', function ()    {
 //        // Uses Auth Middleware
 //    });

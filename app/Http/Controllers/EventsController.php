@@ -45,17 +45,36 @@ class EventsController extends Controller
         try {
             $input = $request->all();
             $main_picture_url = $request->file('main_picture_url');
+            $picture_2 = $request->file('picture_2');
+            $picture_3 = $request->file('picture_3');
             $dir = "photos/";
+
+            $img = null;
+            $img_2 = null;
+            $img_3 = null;
+
+            $path = null;
+            $path_2 = null;
+            $path_3 = null;
 
             if (File::exists(public_path($dir)) == false) {
                 File::makeDirectory(public_path($dir), 0777, true);
             }
             $img = Image::make($main_picture_url->path());
+            $img_2 = Image::make($picture_2->path());
+            $img_3 = Image::make($picture_3->path());
 
             $path = "{$dir}" . uniqid() . "." . $main_picture_url->getClientOriginalExtension();
+            $path_2 = "{$dir}" . uniqid() . "." . $picture_2->getClientOriginalExtension();
+            $path_3 = "{$dir}" . uniqid() . "." . $picture_3->getClientOriginalExtension();
             $img->save(public_path($path));
+            $img_2->save(public_path($path_2));
+            $img_3->save(public_path($path_3));
 
             $input['main_picture_url'] = $path;
+            $input['picture_2'] = $path_2;
+            $input['picture_3'] = $path_3;
+
             $event = Event::create($input);
             DB::commit();
         } catch (\Exception $e) {

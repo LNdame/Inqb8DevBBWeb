@@ -178,7 +178,8 @@ return [
         App\Providers\RouteServiceProvider::class,
         Acacha\AdminLTETemplateLaravel\Providers\AdminLTETemplateServiceProvider::class,
 	    Yajra\DataTables\DataTablesServiceProvider::class,
-        Yajra\Datatables\ButtonsServiceProvider::class,
+//        Yajra\Datatables\ButtonsServiceProvider::class,
+        Zizaco\Entrust\EntrustServiceProvider::class,
 
     ],
 
@@ -230,6 +231,7 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         'AdminLTE' => Acacha\AdminLTETemplateLaravel\Facades\AdminLTE::class,
 	'DataTables' => Yajra\DataTables\Facades\DataTables::class,
+        'Entrust' => Zizaco\Entrust\EntrustFacade::class,
 
     ],
 

@@ -57,7 +57,8 @@
                     <li class="#"><a href="{{ url('/list_users') }}"><i class='fa fa-address-card'></i> <span>Users</span></a></li>
                     <li class="#"><a href="{{ url('get_beer_lovers') }}"><i class='fa fa-users'></i> <span>Beer Lovers</span></a></li>
                     <li class="#"><a href="#"><i class='fa fa-reorder'></i> <span style="cursor:pointer;">Preferences</span></a></li>
-                    <li><a href="#"><i class='fa fa-cog'></i> <span>Roles</span></a></li>
+                    <li><a href="{{url('roles')}}"><i class='fa fa-cog'></i> <span>Roles</span></a></li>
+                    <li><a href="{{url('permissions')}}"><i class='fa fa-cog'></i> <span>Permissions</span></a></li>
                 </ul>
             </li>
 

@@ -119,6 +119,21 @@
                             </div>
                         </div>
 
+                        <div class="row">
+
+                            <div class="col-md-6 form-group">
+                                <label for="picture_2">Second Picture</label>
+                                <input id="picture_2" name="picture_2" class="form-control" type="file"
+                                       placeholder="Upload Second picture">
+                            </div>
+
+                            <div class="col-md-6 form-group">
+                                <label for="picture_3">Third Picture</label>
+                                <input id="picture_3" name="picture_3" class="form-control" type="file"
+                                       placeholder="Upload Third picture">
+                            </div>
+                        </div>
+
 
                         <div class="box-footer">
                             <center>

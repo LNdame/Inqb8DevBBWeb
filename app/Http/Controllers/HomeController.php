@@ -35,17 +35,24 @@ class HomeController extends Controller
     public function index()
     {
         $user = Auth::user();
-        if ($user) {
-            $role = $user->role;
-            if ($role == "1") {
-                return view('adminlte::home');
-            } else if ($role == "2") {
-                return view('establishment_home');
-            } else {
-                return view('welcome');
-            }
-
+        if ($user->hasRole('Super Admin')) {
+            return view('adminlte::home');
+        } else if ($user->hasRole('Admin')) {
+            return view('adminlte::admin_home');
+        } else if ($user->hasRole('Establishment Owner')) {
+            return view('establishment_home');
         }
+//        if ($user) {
+//            $role = $user->role;
+//            if ($role == "1") {
+//                return view('adminlte::home');
+//            } else if ($role == "2") {
+//                return view('establishment_home');
+//            } else {
+//                return view('welcome');
+//            }
+//
+//        }
         return;
 
     }
