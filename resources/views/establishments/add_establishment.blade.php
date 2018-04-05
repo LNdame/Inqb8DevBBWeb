@@ -119,6 +119,7 @@
                                        placeholder="Upload Third picture">
                             </div>
                         </div>
+
                         <div class="box-footer">
                             <center>
                                 <button class="btn btn-success" type="submit"><i class="fa fa-plus-square"></i> Save
@@ -140,6 +141,9 @@
                 var randomstring = Math.random().toString(36).slice(-8);
                 $("#user_name").val(establishment_name);
                 $("#password").val(randomstring);
+            });
+            $('select').select2({
+                placeholder: 'Select or search an option'
             });
         });
 

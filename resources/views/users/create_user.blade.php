@@ -9,6 +9,7 @@
                 </div>
                 <form role="form" id="add-establishment" action="/save_user" method="post">
                     {{ csrf_field() }}
+                    <input id="creator_id" hidden name="creator_id" type="number" value="{{Auth::user()->id}}">
                     <div class="box-body">
                         <div class="row">
 
@@ -34,8 +35,42 @@
                         </div>
                         <div class="row">
                             <div class="col-md-6 form-group">
+                                <label for="">Creator</label>
+                                <input id="" disabled="disabled" name="" type="text" class="form-control"
+                                       value="{{Auth::user()->first_name . ' ' .Auth::user()->last_name}}">
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <label for="role_id">Role</label>
+                                <select id="role_id" name="role_id" class="form-control">
+                                    <option></option>
+                                    @foreach($roles as $role)
+                                        <option value="{{$role->id}}">{{$role->display_name}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                        <div id="establishments" class="row">
+                            <div class="col-md-6 form-group">
+                                <label for="establishment_id">Establishment</label>
+                                <select id="establishment_id" name="establishment_id" class="form-control">
+                                    <option></option>
+                                    @foreach($establishments as $establishment)
+                                        <option value="{{$establishment->id}}">{{$establishment->name}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                        <hr>
+                        <label>*Auto generated credentials - Credentials will be mailed to the user.</label>
+                        <div class="row">
+                            <div class="col-md-6 form-group">
                                 <label for="username">User Name</label>
                                 <input id="username" name="username" type="text" class="form-control" placeholder="User Name">
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <label for="password">Password</label>
+                                <input id="password" name="password" type="text" class="form-control"
+                                       placeholder="Password">
                             </div>
                         </div>
 
@@ -49,6 +84,47 @@
             </div>
         </div>
     </div>
-@endsection
 
+@endsection
+@push('datatable-scripts')
+    {{--<script--}}
+    {{--src="https://code.jquery.com/jquery-3.3.1.min.js"--}}
+    {{--integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="--}}
+    {{--crossorigin="anonymous"></script>--}}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
+    <script type="text/javascript">
+        //        $.noConflict();
+        $(document).ready(function ($) {
+            $(function () {
+//                $('#datetimepicker1').datetimepicker();
+//                $('#datetimepicker2').datetimepicker();
+                $('select').select2({
+                    placeholder: 'Select or search an option'
+                });
+                $('#establishments').hide();
+                $("#email").blur(function () {
+                    var randomstring = Math.random().toString(36).slice(-8);
+                    $("#username").val($("#email").val());
+                    $("#password").val(randomstring);
+                });
+                $('#role_id').on('change', function () {
+                    var selected_value = this.value;
+                    if (selected_value == 3) {
+                        $('#establishments').show();
+                    }
+                    else {
+                        $('#establishments').hide();
+                    }
+                });
+
+                $("#email").blur(function () {
+                    var randomstring = Math.random().toString(36).slice(-8);
+                    $("#user_name").val($("#email").val());
+                    $("#password").val(randomstring);
+                });
+            });
+        });
+    </script>
+
+@endpush()
 

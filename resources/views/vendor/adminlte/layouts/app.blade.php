@@ -35,10 +35,10 @@ desired effect
     <div class="wrapper">
 
     @include('adminlte::layouts.partials.mainheader')
-        @role('Super Admin')
+        @role('super_admin')
         @include('adminlte::layouts.partials.sidebar')
         @endrole
-        @role('Admin')
+        @role('admmin')
         @include('adminlte::layouts.partials.admin_sidebar')
         @endrole
 

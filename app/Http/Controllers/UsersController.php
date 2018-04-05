@@ -5,7 +5,10 @@ namespace App\Http\Controllers;
 use App\Beer;
 use App\BeerLover;
 use App\Discount;
+use App\Establishment;
+use App\Jobs\InviteUsers;
 use App\Preference;
+use App\Role;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\User;
@@ -22,17 +25,26 @@ class UsersController extends Controller
     }
 
     public function CreateUser(){
-        return view('users.create_user');
+        $roles = Role::all();
+        $establishments = Establishment::all();
+        return view('users.create_user', compact('roles', 'establishments'));
     }
 
     public function SaveUser(Request $request){
         $input = $request->all();
 //        dd($input);
+        $initial_password = $input['password'];
+        $input['email_token'] = base64_encode($input['email']);
         $input['password'] = bcrypt('beerly');
+        $role_id = $input['role_id'];
+        $role = Role::where('id', $role_id)->first();
         DB::beginTransaction();
         try{
             $user = User::create($input);
             DB::commit();
+            $user->attachRole($role);
+            event($user);
+            dispatch(new InviteUsers($user, $initial_password));
         }catch (\Exception $e){
             DB::rollback();
             throw $e;
