@@ -38,8 +38,11 @@ desired effect
         @role('super_admin')
         @include('adminlte::layouts.partials.sidebar')
         @endrole
-        @role('admmin')
+        @role('admin')
         @include('adminlte::layouts.partials.admin_sidebar')
+        @endrole
+        @role('establishment_owner')
+        @include('adminlte::layouts.partials.establishments_sidebar')
         @endrole
 
     <!-- Content Wrapper. Contains page content -->

@@ -25,7 +25,7 @@ class UsersController extends Controller
     }
 
     public function CreateUser(){
-        $roles = Role::all();
+        $roles = Role::where('name', '!=', 'super_admin')->get();
         $establishments = Establishment::all();
         return view('users.create_user', compact('roles', 'establishments'));
     }
@@ -35,7 +35,7 @@ class UsersController extends Controller
 //        dd($input);
         $initial_password = $input['password'];
         $input['email_token'] = base64_encode($input['email']);
-        $input['password'] = bcrypt('beerly');
+        $input['password'] = bcrypt($initial_password);
         $role_id = $input['role_id'];
         $role = Role::where('id', $role_id)->first();
         DB::beginTransaction();
