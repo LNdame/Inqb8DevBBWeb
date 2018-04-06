@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Beer;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Yajra\Datatables\Datatables;
 use DB;
 
@@ -33,7 +34,13 @@ class BeersController extends Controller
 
     public function getBeers()
     {
-        $beers = DB::table('beers')->select('*');
+        $beers = null;
+        if (Auth::user()->hasRole('super_admin') || Auth::user()->hasRole('admin')) {
+            $beers = DB::table('beers')->select('*');
+
+        } else {
+            $beers = DB::table('beers')->join('users', 'users.id', 'beers.creator_id')->get();
+        }
         return DataTables::of($beers)
             ->addColumn('action', function ($beer) {
                 return '<a href="view_beer/' . $beer->id . '" title="View Beer" class="btn btn-xs btn-success"><i class="glyphicon glyphicon-eye-open"></i></a><a href="edit_beer/' . $beer->id . '" style="margin-left:0.5em" title="Edit Beer" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i></a><a href="delete_beer/' . $beer->id . '" style="margin-left:0.5em" class="btn btn-xs btn-danger" title="Delete Beer"><i class="glyphicon glyphicon-trash "></i></a>';
@@ -49,6 +56,7 @@ class BeersController extends Controller
      */
     public function store(Request $request)
     {
+
         DB::beginTransaction();
         try {
             $beer = Beer::create($request->all());

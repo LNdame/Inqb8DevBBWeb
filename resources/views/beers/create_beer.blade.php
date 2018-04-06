@@ -12,7 +12,7 @@
                     {{ csrf_field() }}
                     <div class="box-body">
                         <div class="row">
-
+                            <input name="creator_id" value="{{Auth::user()->id}}" hidden>
                             <div class="col-md-6 form-group">
                                 <label for="name">Beer Name</label>
                                 <input id="name" name="name" class="form-control" type="text" placeholder="Beer Name">

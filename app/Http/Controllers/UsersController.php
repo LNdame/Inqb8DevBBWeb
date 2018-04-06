@@ -16,6 +16,7 @@ use App\User;
 
 
 use DB;
+use Illuminate\Support\Facades\Auth;
 use Yajra\Datatables\Datatables;
 
 class UsersController extends Controller
@@ -52,6 +53,43 @@ class UsersController extends Controller
         return redirect('/list_users');
     }
 
+    public function manageUserProfile(User $user)
+    {
+//        dd($user);
+        $establishment = Establishment::where('id', $user->establishment_id)->first();
+        return view('users.update_user_profile', compact('user', 'establishment'));
+    }
+
+    public function saveUpdatedUserProfile(Request $request, User $user)
+    {
+        $input = $request->all();
+//        dd($input);
+        $main_picture_url = $request->file('picture_url');
+
+        $dir = "photos/";
+
+        if (File::exists(public_path($dir)) == false) {
+            File::makeDirectory(public_path($dir), 0777, true);
+        }
+        $img = Image::make($main_picture_url->path());
+        $path = "{$dir}" . uniqid() . "." . $main_picture_url->getClientOriginalExtension();
+        $input['picture_url'] = $path;
+        $img->save(public_path($path));
+
+        DB::beginTransaction();
+        try {
+
+            $user_updated = $user->update(['contact_number' => $input['contact_number'], 'picture_url' => $path]);
+//            dd($user_updated);
+            DB::commit();
+
+        } catch (\Exception $e) {
+            DB::rollback();
+            throw $e;
+        }
+        return redirect('home');
+    }
+
     public function EditUser(User $user){
         dd($user);
     }
@@ -65,7 +103,13 @@ class UsersController extends Controller
     }
 
     public function getUsers(){
-        $users = DB::table('users')->select('*');
+        $users = null;
+        if (Auth::user()->hasRole('super_admin')) {
+            $users = DB::table('users')->select('*')->get();
+        } else {
+            $users = DB::table('users')->where('creator_id', Auth::user()->id)->get();
+        }
+
         return DataTables::of($users)
             ->addColumn('action',function($user){
                 return '<a href="view_user/'.$user->id.'" title="View User" class="btn btn-xs btn-success"><i class="glyphicon glyphicon-eye-open"></i></a><a href="edit_user/'.$user->id.'" style="margin-left:0.5em" title="Edit User" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i></a><a href="delete_user/'.$user->id.'" style="margin-left:0.5em" class="btn btn-xs btn-danger" title="Delete User"><i class="glyphicon glyphicon-trash "></i></a>';

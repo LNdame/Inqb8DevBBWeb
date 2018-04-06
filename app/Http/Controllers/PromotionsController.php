@@ -22,10 +22,32 @@ class PromotionsController extends Controller
     }
 
     public function getPromotions(){
-        $promotions = DB::table('promotions')
-            ->join('establishments', 'establishments.id', 'promotions.establishment_id')
-            ->join('beers', 'beers.id', 'promotions.beer_id')
-            ->select('title', 'promotions.id', 'start_date', 'end_date', 'promotions.status', 'promotions.price', 'beers.name as beer_name', 'establishments.name as est_name');
+        $promotions = null;
+        if (Auth::user()->hasRole('super_admin')) {
+            $promotions = DB::table('promotions')
+                ->join('establishments', 'establishments.id', 'promotions.establishment_id')
+                ->join('beers', 'beers.id', 'promotions.beer_id')
+                ->select('title', 'promotions.id', 'start_date', 'end_date', 'promotions.status', 'promotions.price', 'beers.name as beer_name', 'establishments.name as est_name')->get();
+
+        } else if (Auth::user()->hasRole('establishment_owner')) {
+            $promotions = DB::table('promotions')
+                ->join('establishments', 'establishments.id', 'promotions.establishment_id')
+                ->join('users', 'users.id', 'promotions.creator_id')
+                ->join('beers', 'beers.id', 'promotions.beer_id')
+                ->select('title', 'promotions.id', 'start_date', 'end_date', 'promotions.status', 'promotions.price', 'beers.name as beer_name', 'establishments.name as est_name')->get();
+        } else {
+            $promotions = DB::table('promotions')
+                ->join('establishments', 'establishments.id', 'promotions.establishment_id')
+                ->join('beers', 'beers.id', 'promotions.beer_id')
+                ->select('title', 'promotions.id', 'start_date', 'end_date', 'promotions.status', 'promotions.price', 'beers.name as beer_name', 'establishments.name as est_name')->get();
+            return DataTables::of($promotions)
+                ->addColumn('action', function ($promotion) {
+                    return '<a href="view_promotion/' . $promotion->id . '" style="margin-top:1em;"
+            title="View Promo" class="btn btn-xs btn-success"><i class="glyphicon glyphicon-eye-open"></i>
+            </a>';
+                })->make(true);
+        }
+
         return DataTables::of($promotions)
             ->addColumn('action', function ($promotion) {
                 return '<a href="view_promotion/' . $promotion->id . '" style="margin-top:1em;"

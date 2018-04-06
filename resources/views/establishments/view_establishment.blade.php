@@ -5,7 +5,9 @@
         <div class="col-md-10">
             <div class="box box-primary">
                 <div class="box-header with-border">
-                    <h3 class="box-title">Establishment Details</h3>
+                    <h3 class="box-title">Establishment Details - {{$establishment->name}}</h3>
+                    <a class="btn btn-primary pull-right" href="{{url('/edit_establishment/'.$establishment->id)}}"><i
+                                class="fa fa-edit"></i>Edit</a>
                 </div>
                 <form role="form" id="add-establishment" enctype="multipart/form-data"
                       action="/update_establishment/{{$establishment->id}}"

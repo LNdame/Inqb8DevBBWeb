@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use DB;
+use Illuminate\Support\Facades\Auth;
 use Yajra\Datatables\Datatables;
 use App\Establishment;
 use Image;
@@ -64,7 +65,12 @@ class EstablishmentController extends Controller
         return redirect('/get_establishments');
     }
     public function getEstablishments(){
-        $establishments = DB::table('establishments')->select('*');
+        if (Auth::user()->hasRole('super_admin')) {
+            $establishments = DB::table('establishments')->select('*');
+        } else {
+            $establishments = DB::table('establishments')->where('creator_id', Auth::user()->id)->get();
+        }
+
         return DataTables::of($establishments)
             ->addColumn('action',function($establishment){
                 return '<a href="view_establishment/' . $establishment->id . '" style="margin-top:1em;"
@@ -74,12 +80,19 @@ class EstablishmentController extends Controller
             ->make(true);
     }
 
+    public function getEstablishmentByID(Establishment $establishment)
+    {
+
+        return view('establishments.view_establishment', compact('establishment'));
+    }
+
     public function EditEstablishment(Establishment $establishment){
         return view('establishments.edit_establishment', compact('establishment'));
     }
 
     public function updateEstablishment(Request $request, Establishment $establishment)
     {
+        $establishment_id = $establishment->id;
         DB::beginTransaction();
         try {
             $input = $request->all();
@@ -133,7 +146,13 @@ class EstablishmentController extends Controller
             DB::rollback();
             throw $e;
         }
-        return redirect('/get_establishments');
+        if (Auth::user()->hasRole('super_admin') || Auth::user()->hasRole('admin')) {
+            return redirect('/get_establishments');
+        } else {
+            $establishment = Establishment::where('id', $establishment_id)->first();
+            return view('establishments.view_establishment', compact('establishment'));
+        }
+
     }
 
     public function DeleteEstablishment(Establishment $establishment){

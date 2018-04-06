@@ -5,7 +5,9 @@
         <div class="col-md-10">
             <div class="box box-primary">
                 <div class="box-header with-border">
-                    <h3 class="box-title">Add Establishment</h3>
+                    <h3 class="box-title">Edit Establishment - {{$establishment->name}}</h3>
+                    <a class="btn btn-primary pull-right" onclick="goBack()"><i class="fa fa-arrow-left"></i>Back</a>
+
                 </div>
                 <form role="form" id="add-establishment" enctype="multipart/form-data"
                       action="/update_establishment/{{$establishment->id}}"
@@ -97,19 +99,21 @@
 
                         {{--</div>--}}
 
-                        <div class="col-md-6 form-group">
-                            <label for="status">Status</label>
-                            <select id="status" name="status" class="form-control">
-                                @if('active'==$establishment->status)
-                                    <option value="active" selected>Active</option>
-                                    <option value="inactive">InActive</option>
-                                @else
-                                    <option value="inactive" selected>InActive</option>
-                                    <option value="active">Active</option>
-                                @endif
-                            </select>
-                        </div>
+                        <div class="row">
 
+                            <div class="col-md-6 form-group">
+                                <label for="status">Status</label>
+                                <select id="status" name="status" class="form-control">
+                                    @if('active'==$establishment->status)
+                                        <option value="active" selected>Active</option>
+                                        <option value="inactive">InActive</option>
+                                    @else
+                                        <option value="inactive" selected>InActive</option>
+                                        <option value="active">Active</option>
+                                    @endif
+                                </select>
+                            </div>
+                        </div>
 
                         <div class="row" style="margin-top:1em;">
                             <div class="col-md-6 form-group">
@@ -148,7 +152,7 @@
                         </div>
                         <div class="box-footer">
                             <center>
-                                <button class="btn btn-success" type="submit"><i class="fa fa-plus-square"></i> Save
+                                <button class="btn btn-success" type="submit"><i class="fa fa-plus-square"></i> Update
                                 </button>
                             </center>
                         </div>
@@ -192,6 +196,10 @@
                 });
             });
         });
+
+        function goBack() {
+            window.history.back();
+        }
     </script>
 @endpush
 

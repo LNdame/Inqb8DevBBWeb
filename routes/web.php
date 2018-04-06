@@ -16,6 +16,9 @@ Route::get('/', function () {
 });
 
 Route::group(['middleware' => 'auth'], function () {
+    Route::get('/update_user_profile/{user}', 'UsersController@manageUserProfile');
+    Route::post('/update_user_profile/edit/{user}', 'UsersController@saveUpdatedUserProfile');
+
     Route::get('/list_users','UsersController@index');
     Route::get('users/datatable','UsersController@getUsers')->name('get_users');
     Route::get('create_user','UsersController@CreateUser');
@@ -39,6 +42,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('get_establishments_types_list', 'EstablishmentController@getEstablishmentsTypes')->name('establishments.get_establishments_types');
     Route::get('/get_menus','MenusController@getMenusIndex');
     Route::get('/get_menus_list','MenusController@getMenus')->name('menus.get_menus_list');
+    Route::get('/get_establishment_details/{establishment}', 'EstablishmentController@getEstablishmentByID');
 
     Route::get('/get_promotions','PromotionsController@getPromotionsIndex');
     Route::get('/get_establishment_promotions', 'PromotionsController@getEstablishmentPromotionsIndex');

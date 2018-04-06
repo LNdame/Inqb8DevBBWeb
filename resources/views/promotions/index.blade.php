@@ -3,9 +3,16 @@
 @section('main-content')
     <div class="container-fluid"  >
         <div class="row" style="margin-top:1em;">
+            @role('establishment_owner')
             <div class="col-sm-2">
                 <a href="/create_promotion" class="btn btn-success"><i class="fa fa-plus-square"></i> Add Promotion</a>
             </div>
+            @endrole
+            @role('super_admin')
+            <div class="col-sm-2">
+                <a href="/create_promotion" class="btn btn-success"><i class="fa fa-plus-square"></i> Add Promotion</a>
+            </div>
+            @endrole
         </div>
         <div class="row" style="margin-top:1em;">
             <div class="col-md-12">

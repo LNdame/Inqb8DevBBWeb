@@ -7,7 +7,7 @@
 
 @section('main-content')
     <?php $users = App\User::all(); $beer_lovers = App\BeerLover::all(); $establishments = App\Establishment::all();
-    $beers = App\Beer::all();$promotions = App\Promotion::all();
+    $beers = App\Beer::all();$promotions = App\Promotion::where('creator_id', Auth::user()->id)->get();
     $establishment = \App\Establishment::where('id', Auth::user()->establishment_id)->first();
     ?>
     <div class="container-fluid" style="background-color:white">
@@ -40,7 +40,7 @@
                         <div class="info-box bg-aqua">
                             <span class="info-box-icon"><i class="ion ion-ios-heart-outline"></i> </span>
                             <div class="info-box-content">
-                                <span class="info-box-text">Beer Lovers</span>
+                                <span class="info-box-text">Establishment Beer Lovers </span>
                                 <span class="info-box-number">{{count($beer_lovers)}}</span>
                                 <div class="progress">
                                     <div class="progress-bar" style="width:50%"></div>
