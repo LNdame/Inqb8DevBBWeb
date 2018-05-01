@@ -15,6 +15,7 @@ return [
 
     'name' => env('APP_NAME', 'Beerly Beloved'),
 
+
     /*
     |--------------------------------------------------------------------------
     | Application Environment
@@ -180,6 +181,8 @@ return [
 	    Yajra\DataTables\DataTablesServiceProvider::class,
 //        Yajra\Datatables\ButtonsServiceProvider::class,
         Zizaco\Entrust\EntrustServiceProvider::class,
+        Intervention\Image\ImageServiceProvider::class,
+        Brian2694\Toastr\ToastrServiceProvider::class,
 
     ],
 
@@ -232,6 +235,8 @@ return [
         'AdminLTE' => Acacha\AdminLTETemplateLaravel\Facades\AdminLTE::class,
 	'DataTables' => Yajra\DataTables\Facades\DataTables::class,
         'Entrust' => Zizaco\Entrust\EntrustFacade::class,
+        'Image' => Intervention\Image\Facades\Image::class,
+        'Toastr' => Brian2694\Toastr\Facades\Toastr::class,
 
     ],
 

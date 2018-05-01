@@ -15,22 +15,27 @@
 
                             <div class="col-md-6 form-group">
                                 <label for="first_name">First Name</label>
-                                <input id="first_name" name="first_name" class="form-control" placeholder="First Name">
+                                <input id="first_name" name="first_name" class="form-control" placeholder="First Name"
+                                       required>
                             </div>
                             <div class="col-md-6 form-group">
-                                <label for="middle_name">Middle Name</label>
-                                <input id="middle_name" name="middle_name" type="text" class="form-control" placeholder="Middle Name">
+                                <label for="last_name">Last Name</label>
+                                <input id="last_name" name="last_name" type="text" class="form-control"
+                                       placeholder="Last Name" required>
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-md-6 form-group">
-                                <label for="last_name">Last Name</label>
-                                <input id="last_name" name="last_name" type="text" class="form-control" placeholder="Last Name">
-                            </div>
+
 
                             <div class="col-md-6 form-group">
                                 <label for="email">Email Address</label>
-                                <input id="email" name="email" class="form-control" type="email" placeholder="Email Address">
+                                <input id="email" name="email" class="form-control" type="email"
+                                       placeholder="Email Address" required>
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <label for="contact_number">Contact Number</label>
+                                <input id="contact_number" name="contact_number" class="form-control" type="tel"
+                                       placeholder="Contact Number" required>
                             </div>
                         </div>
                         <div class="row">
@@ -41,7 +46,7 @@
                             </div>
                             <div class="col-md-6 form-group">
                                 <label for="role_id">Role</label>
-                                <select id="role_id" name="role_id" class="form-control">
+                                <select id="role_id" name="role_id" class="form-control" required>
                                     <option></option>
                                     @foreach($roles as $role)
                                         <option value="{{$role->id}}">{{$role->display_name}}</option>
@@ -52,24 +57,29 @@
                         <div id="establishments" class="row">
                             <div class="col-md-6 form-group">
                                 <label for="establishment_id">Establishment</label>
-                                <select id="establishment_id" name="establishment_id" class="form-control">
+                                <select id="establishment_id" name="establishment_id" class="form-control" required>
                                     <option></option>
                                     @foreach($establishments as $establishment)
                                         <option value="{{$establishment->id}}">{{$establishment->name}}</option>
                                     @endforeach
                                 </select>
                             </div>
+
                         </div>
+                        {{--<div class="row">--}}
+                        {{----}}
+                        {{--</div>--}}
                         <hr>
                         <label>*Auto generated credentials - Credentials will be mailed to the user.</label>
                         <div class="row">
                             <div class="col-md-6 form-group">
                                 <label for="username">User Name</label>
-                                <input id="username" name="username" type="text" class="form-control" placeholder="User Name">
+                                <input id="username" name="username" type="text" class="form-control"
+                                       placeholder="User Name" required>
                             </div>
                             <div class="col-md-6 form-group">
                                 <label for="password">Password</label>
-                                <input id="password" name="password" type="text" class="form-control"
+                                <input id="password" name="password" type="text" class="form-control" required
                                        placeholder="Password">
                             </div>
                         </div>
@@ -87,17 +97,12 @@
 
 @endsection
 @push('datatable-scripts')
-    {{--<script--}}
-    {{--src="https://code.jquery.com/jquery-3.3.1.min.js"--}}
-    {{--integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="--}}
-    {{--crossorigin="anonymous"></script>--}}
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
     <script type="text/javascript">
         //        $.noConflict();
         $(document).ready(function ($) {
             $(function () {
-//                $('#datetimepicker1').datetimepicker();
-//                $('#datetimepicker2').datetimepicker();
                 $('select').select2({
                     placeholder: 'Select or search an option'
                 });

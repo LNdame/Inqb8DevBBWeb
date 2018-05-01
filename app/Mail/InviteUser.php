@@ -37,7 +37,7 @@ class InviteUser extends Mailable
         return $this->markdown('emails.invite_user')
             ->subject('Beerly Beloved User Account')
             ->with([
-                'url' => 'http://nyiombodev.co.za/verify_email/' . $this->user->email_token,
+                'url' => 'http://http://ec2-13-58-20-88.us-east-2.compute.amazonaws.com/verify_email/' . $this->user->email_token,
                 'name' => $this->user->name,
                 'surname' => $this->user->surname,
                 'user_name' => $this->user->email,

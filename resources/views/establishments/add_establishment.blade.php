@@ -24,19 +24,19 @@
                                        placeholder="Establishment Address">
                             </div>
                         </div>
-                        <div class="row">
+                        {{--<div class="row">--}}
 
-                            <div class="col-md-6 form-group">
-                                <label for="name">Account UserName</label>
-                                <input id="user_name" name="user_name" class="form-control"
-                                       placeholder="Account UserName">
-                            </div>
-                            <div class="col-md-6 form-group">
-                                <label for="address">Password</label>
-                                <input id="password" name="password" type="text" class="form-control"
-                                       placeholder="Account Password">
-                            </div>
-                        </div>
+                        {{--<div class="col-md-6 form-group">--}}
+                        {{--<label for="name">Account UserName</label>--}}
+                        {{--<input id="user_name" name="user_name" class="form-control"--}}
+                        {{--placeholder="Account UserName">--}}
+                        {{--</div>--}}
+                        {{--<div class="col-md-6 form-group">--}}
+                        {{--<label for="address">Password</label>--}}
+                        {{--<input id="password" name="password" type="text" class="form-control"--}}
+                        {{--placeholder="Account Password">--}}
+                        {{--</div>--}}
+                        {{--</div>--}}
                         <div class="row">
                             <div class="col-md-6 form-group">
                                 <label for="latitude">Establishment Latitude</label>

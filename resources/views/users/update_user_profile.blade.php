@@ -38,6 +38,11 @@
                                        type="file" value=""
                                        placeholder="Upload File Url">
                             </div>
+                            <div class="col-md-3 form-group">
+                                <label for="depot">Contact Number</label>
+                                <input id="contact_number" name="contact_number" type='tel' class="form-control"
+                                       value="{{$establishment->contact_number}}"/>
+                            </div>
 
                         </div>
 

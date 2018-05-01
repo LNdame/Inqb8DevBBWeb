@@ -21050,7 +21050,9 @@ table.text-center th {
 }
 .login-page,
 .register-page {
-  background: #d2d6de;
+    background-image: url(../img/beerly_cover.jpg);
+    background-size: cover;
+
 }
 .login-box,
 .register-box {

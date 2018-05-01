@@ -14,8 +14,13 @@
 Route::get('/', function () {
     return view('welcome');
 });
-
+Route::get('/account_creation_success', 'Auth\RegisterController@accountSuccess');
+Route::get('/account_not_verified', 'Auth\RegisterController@accountNotRegistered');
+Route::get('/verify_user/{token}', 'Auth\RegisterController@verify');
+Route::get('/approve_establishment/{id}', 'Auth\RegisterController@approveEstablishment');
 Route::group(['middleware' => 'auth'], function () {
+
+
     Route::get('/update_user_profile/{user}', 'UsersController@manageUserProfile');
     Route::post('/update_user_profile/edit/{user}', 'UsersController@saveUpdatedUserProfile');
 
@@ -53,7 +58,7 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('/get_events_list', 'EventsController@getEstablishmentEvents')->name('events.get_establishment_events');
     Route::get('get_establishment_events', 'EventsController@getEstEvents');
-    Route::get('delete_establishment_event/{event}', 'Events@deleteEstablishmentEvent');
+    Route::get('delete_establishment_event/{event}', 'EventsController@deleteEstablishmentEvent');
 //    Route::get('/get_promotions_list_promo','PromotionsController@getEstablishmentPromotions')->name('promotions.get_establishment_promotions_promo');
     Route::get('/create_promotion', 'PromotionsController@createPromotions');
     Route::get('/create_establishment_promotion', 'PromotionsController@createEstablishmentPromotions');

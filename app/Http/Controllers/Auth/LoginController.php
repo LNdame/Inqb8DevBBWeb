@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\User;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 
@@ -68,11 +69,24 @@ class LoginController extends Controller
      */
     protected function attemptLogin(Request $request)
     {
-        if ($this->username() === 'email') return $this->attemptLoginAtAuthenticatesUsers($request);
-        if ( ! $this->attemptLoginAtAuthenticatesUsers($request)) {
-            return $this->attempLoginUsingUsernameAsAnEmail($request);
+//        dd($request->all());
+        $input = $request->all();
+        $user = User::where('email', $input['email'])->first();
+        try {
+            if ($user->verified == 0) {
+                return redirect('/login');
+            } else if ($user->hasRole('establishment_owner') && $user->admin_approval == 0) {
+                return redirect('/login');
+            } else {
+                if ($this->username() === 'email') return $this->attemptLoginAtAuthenticatesUsers($request);
+                if (!$this->attemptLoginAtAuthenticatesUsers($request)) {
+                    return $this->attempLoginUsingUsernameAsAnEmail($request);
+                }
+                return false;
+            }
+        } catch (\Exception $e) {
+            return redirect('login');
         }
-        return false;
     }
 
     /**

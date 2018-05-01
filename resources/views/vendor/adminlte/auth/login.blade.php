@@ -9,7 +9,7 @@
     <div id="app" v-cloak>
         <div class="login-box">
             <div class="login-logo">
-                <a href="{{ url('/home') }}"><b>Beerly Beloved</b></a>
+                <a href="www.beerlybeloved.co.za"><img src="/img/beerly_logo.png" alt="Beerly Beloved"></a>
             </div><!-- /.login-logo -->
 
         @if (count($errors) > 0)

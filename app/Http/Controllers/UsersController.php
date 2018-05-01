@@ -13,6 +13,8 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\User;
 //use App\Discount;
+use File;
+Use Image;
 
 
 use DB;
@@ -37,7 +39,9 @@ class UsersController extends Controller
         $initial_password = $input['password'];
         $input['email_token'] = base64_encode($input['email']);
         $input['password'] = bcrypt($initial_password);
+        $input['admin_approval'] = 1;
         $role_id = $input['role_id'];
+        $input['verified'] = 1;
         $role = Role::where('id', $role_id)->first();
         DB::beginTransaction();
         try{
@@ -65,28 +69,40 @@ class UsersController extends Controller
         $input = $request->all();
 //        dd($input);
         $main_picture_url = $request->file('picture_url');
+        if ($main_picture_url != null) {
+            $dir = "photos/";
 
-        $dir = "photos/";
+            if (File::exists(public_path($dir)) == false) {
+                File::makeDirectory(public_path($dir), 0777, true);
+            }
+            $img = Image::make($main_picture_url->path());
+            $path = "{$dir}" . uniqid() . "." . $main_picture_url->getClientOriginalExtension();
+            $input['picture_url'] = $path;
+            $img->save(public_path($path));
 
-        if (File::exists(public_path($dir)) == false) {
-            File::makeDirectory(public_path($dir), 0777, true);
+            DB::beginTransaction();
+            try {
+                $user_updated = $user->update(['contact_number' => $input['contact_number'], 'picture_url' => $path]);
+//            dd($user);
+                DB::commit();
+
+            } catch (\Exception $e) {
+                DB::rollback();
+                throw $e;
+            }
+        } else {
+            DB::beginTransaction();
+            try {
+                $user_updated = $user->update(['contact_number' => $input['contact_number']]);
+//            dd($user);
+                DB::commit();
+
+            } catch (\Exception $e) {
+                DB::rollback();
+                throw $e;
+            }
         }
-        $img = Image::make($main_picture_url->path());
-        $path = "{$dir}" . uniqid() . "." . $main_picture_url->getClientOriginalExtension();
-        $input['picture_url'] = $path;
-        $img->save(public_path($path));
 
-        DB::beginTransaction();
-        try {
-
-            $user_updated = $user->update(['contact_number' => $input['contact_number'], 'picture_url' => $path]);
-//            dd($user_updated);
-            DB::commit();
-
-        } catch (\Exception $e) {
-            DB::rollback();
-            throw $e;
-        }
         return redirect('home');
     }
 
@@ -156,32 +172,25 @@ class UsersController extends Controller
 //        dd($request->all());
         DB::beginTransaction();
         try{
-
             $input = $request->all();
             $user_accoount['first_name'] = $input['first_name'];
             $user_accoount['last_name'] = $input['last_name'];
             $user_accoount['email'] = $input['email'];
+            $user_accoount['contact_number'] = '0123456789';
             $user_accoount['username'] = $input['username'];
             $user_accoount['password'] = bcrypt('123456');
             $user_accoount['role'] = "3";
+            $user_accoount['establishment_id'] = 61;
+            $user_accoount['creator_id'] = 4;
+            $user_accoount['email_token'] = $input['email'];
+            $user_accoount['picture_url'] = "none";
+            $user_accoount['verified'] = 1;
+            $user_accoount['admin_approval'] = 1;
             $user = User::create($user_accoount);
+            $input['user_id'] = $user->id;
 
-            $beer_lover_account['user_id'] = $user->id;
-            $beer_lover_account['status'] = "active";
-            $beer_lover_account['date_of_birth'] = $input['date_of_birth'];
-            $beer_lover_account['terms_conditions_accept'] = $input['terms_conditions_accept'];
-            $beer_lover_account['gender'] = $input['gender'];
-            $beer_lover_account['home_city'] = $input['home_city'];
-            $beer_lover_account['referal_code'] = $input['referal_code'];
-            $beer_lover_account['invitation_code'] = $input['invitation_code'];
-            $beer_lover_account['firebase_id'] = $input['firebase_id'];
-            $beer_lover_account['cocktail'] = $input['cocktail'];
-            $beer_lover_account['cocktail_type'] = $input['cocktail_type'];
-            $beer_lover_account['shot'] = $input['shot'];
-            $beer_lover_account['shot_type'] = $input['shot_type'];
+            $beer_lover = BeerLover::create($input);
 
-            $beer_lover = BeerLover::create($beer_lover_account);
-//            dd($beer_lover);
             DB::commit();
             return response()->json($beer_lover, 201);
         }catch(\Exception $e){

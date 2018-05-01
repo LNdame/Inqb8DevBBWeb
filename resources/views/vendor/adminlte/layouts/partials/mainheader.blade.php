@@ -34,7 +34,10 @@
                                     <a href="#">
                                         <div class="pull-left">
                                             <!-- User Image -->
-                                            <img src="{{ Gravatar::get($user->email) }}" class="img-circle" alt="User Image"/>
+                                            <a href="{{ url('/update_user_profile/'.\Illuminate\Support\Facades\Auth::user()->id) }}">
+                                                <img
+                                                        src="{{isset($user->picture_url)? $user->picture_url:Gravatar::get($user->email) }}"
+                                                        class="img-circle" alt="User Image"/></a>
                                         </div>
                                         <!-- Message title and timestamp -->
                                         <h4>
@@ -115,22 +118,22 @@
                     <!-- User Account Menu -->
                     <li class="dropdown user user-menu" id="user_menu">
                         <!-- Menu Toggle Button -->
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                            <!-- The user image in the navbar-->
-                            <img src="{{ Gravatar::get($user->email) }}" class="user-image" alt="User Image"/>
-                            <!-- hidden-xs hides the username on small devices so only the image appears. -->
-                            <span class="hidden-xs">{{ Auth::user()->name }}</span>
-                        </a>
-                        <ul class="dropdown-menu">
-                            <!-- The user image in the menu -->
-                            <li class="user-header">
-                                <img src="{{ Gravatar::get($user->email) }}" class="img-circle" alt="User Image" />
-                                <p>
-                                    {{ Auth::user()->name }}
+                        {{--<a href="#" class="dropdown-toggle" data-toggle="dropdown">--}}
+                        {{--<!-- The user image in the navbar-->--}}
+                        {{--<img src="{{ Gravatar::get($user->email) }}" class="user-image" alt="User Image"/>--}}
+                        {{--<!-- hidden-xs hides the username on small devices so only the image appears. -->--}}
+                        {{--<span class="hidden-xs">{{ Auth::user()->name }}</span>--}}
+                        {{--</a>--}}
+                        {{--<ul class="dropdown-menu">--}}
+                        {{--<!-- The user image in the menu -->--}}
+                        {{--<li class="user-header">--}}
+                        {{--<img src="{{ Gravatar::get($user->email) }}" class="img-circle" alt="User Image" />--}}
+                        {{--<p>--}}
+                        {{--{{ Auth::user()->name }}--}}
 
-                                </p>
-                            </li>
-                            <!-- Menu Body -->
+                        {{--</p>--}}
+                        {{--</li>--}}
+                        {{--<!-- Menu Body -->--}}
                         {{--<li class="user-body">--}}
                         {{--<div class="col-xs-4 text-center">--}}
                         {{--<a href="#">{{ trans('adminlte_lang::message.followers') }}</a>--}}
@@ -142,26 +145,27 @@
                         {{--<a href="#">{{ trans('adminlte_lang::message.friends') }}</a>--}}
                         {{--</div>--}}
                         {{--</li>--}}
-                            <!-- Menu Footer-->
-                            <li class="user-footer">
-                                <div class="pull-left">
-                                    <a href="{{ url('/settings') }}" class="btn btn-default btn-flat">{{ trans('adminlte_lang::message.profile') }}</a>
-                                </div>
-                                <div class="pull-right">
-                                    <a href="{{ url('/logout') }}" class="btn btn-default btn-flat" id="logout"
-                                       onclick="event.preventDefault();
+                        {{--<!-- Menu Footer-->--}}
+                        {{--<li class="user-footer">--}}
+                        {{----}}
+                        {{--</li>--}}
+                        {{--</ul>--}}
+                        {{--<div class="pull-left">--}}
+                        {{--<a href="{{ url('/settings') }}" class="btn btn-default btn-flat">{{ trans('adminlte_lang::message.profile') }}</a>--}}
+                        {{--</div>--}}
+                        <div class="pull-right" style="margin:0.5em;!important;">
+                            <a href="{{ url('/logout') }}" class="btn btn btn-danger" id="logout"
+                               onclick="event.preventDefault();
                                                  document.getElementById('logout-form').submit();">
-                                        {{ trans('adminlte_lang::message.signout') }}
-                                    </a>
+                                <i class="fa fa-power-off"></i>
+                            </a>
 
-                                    <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
-                                        {{ csrf_field() }}
-                                        <input type="submit" value="logout" style="display: none;">
-                                    </form>
+                            <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
+                                {{ csrf_field() }}
+                                <input type="submit" value="logout" style="display: none;">
+                            </form>
 
-                                </div>
-                            </li>
-                        </ul>
+                        </div>
                     </li>
                 @endif
 

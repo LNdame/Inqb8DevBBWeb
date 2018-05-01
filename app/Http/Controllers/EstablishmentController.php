@@ -28,34 +28,39 @@ class EstablishmentController extends Controller
             $picture_2 = $request->file('picture_2');
             $picture_3 = $request->file('picture_3');
             $dir = "photos/";
+            if ($main_picture_url != null) {
+                if (File::exists(public_path($dir)) == false) {
+                    File::makeDirectory(public_path($dir), 0777, true);
+                }
+                $img = Image::make($main_picture_url->path());
+                $img_2 = Image::make($picture_2->path());
+                $img_3 = Image::make($picture_3->path());
 
-            if (File::exists(public_path($dir)) == false) {
-                File::makeDirectory(public_path($dir), 0777, true);
+                $path = "{$dir}" . uniqid() . "." . $main_picture_url->getClientOriginalExtension();
+                $path_2 = "{$dir}" . uniqid() . "." . $picture_2->getClientOriginalExtension();
+                $path_3 = "{$dir}" . uniqid() . "." . $picture_3->getClientOriginalExtension();
+
+                $img->save(public_path($path));
+                $img_2->save(public_path($path_2));
+                $img_3->save(public_path($path_3));
+
+                $input['main_picture_url'] = $path;
+                $input['picture_2'] = $path_2;
+                $input['picture_3'] = $path_3;
+                $establishment = Establishment::create($input);
+            } else {
+                $establishment = Establishment::create($input);
             }
-            $img = Image::make($main_picture_url->path());
-            $img_2 = Image::make($picture_2->path());
-            $img_3 = Image::make($picture_3->path());
 
-            $path = "{$dir}" . uniqid() . "." . $main_picture_url->getClientOriginalExtension();
-            $path_2 = "{$dir}" . uniqid() . "." . $picture_2->getClientOriginalExtension();
-            $path_3 = "{$dir}" . uniqid() . "." . $picture_3->getClientOriginalExtension();
-
-            $img->save(public_path($path));
-            $img_2->save(public_path($path_2));
-            $img_3->save(public_path($path_3));
-
-            $input['main_picture_url'] = $path;
-            $input['picture_2'] = $path_2;
-            $input['picture_3'] = $path_3;
-            $establishment = Establishment::create($input);
 //            dd($establishment);
-            $user_accoount['first_name'] = $input['name'];
-            $user_accoount['last_name'] = $input['name'];
-            $user_accoount['email'] = $input['user_name'];
-            $user_accoount['username'] = $input['user_name'];
-            $user_accoount['password'] = bcrypt($input['password']);
-            $user_accoount['role'] = "2";
-            $user = User::create($user_accoount);
+//            $user_accoount['first_name'] = $input['name'];
+//            $user_accoount['last_name'] = $input['name'];
+//            $user_accoount['email'] = $input['user_name'];
+//            $user_accoount['username'] = $input['user_name'];
+//            $user_accoount['password'] = bcrypt($input['password']);
+//            $user_accoount['role'] = "2";
+//            $user_accoount['contact_number'] = $input['contact_number'];
+//            $user = User::create($user_accoount);
            DB::commit();
 //           return redirect('/get_establishments');
         }catch(\Exception $e){
