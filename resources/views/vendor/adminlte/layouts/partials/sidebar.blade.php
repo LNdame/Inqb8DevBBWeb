@@ -9,7 +9,7 @@
             <div class="user-panel" style="height: 8em;">
                 <div class="pull-left image">
                     <a href="{{ url('/update_user_profile/'.\Illuminate\Support\Facades\Auth::user()->id) }}"> <img
-                                src="{{isset($user->picture_url)? $user->picture_url:Gravatar::get($user->email) }}"
+                                src="{{isset($user->picture_url)? "/".$user->picture_url:Gravatar::get($user->email) }}"
                                 class="img-circle" alt="User Image"/></a>
                 </div>
                 {{--<div class="pull-left info">--}}
