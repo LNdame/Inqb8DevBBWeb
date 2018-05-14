@@ -93,12 +93,22 @@
     </div>
 @endsection
 @push('datatable-scripts')
+    <script
+            src="https://code.jquery.com/jquery-3.3.1.min.js"
+            integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js"></script>
     <script type="text/javascript">
+        //        });
         $.noConflict();
         jQuery(document).ready(function ($) {
             $(function () {
-                $('#datetimepicker1').datetimepicker();
-                $('#datetimepicker2').datetimepicker();
+                $('#datetimepicker1').datetimepicker({
+                    format: 'YYYY-MM-DD HH:mm:ss',
+                });
+                $('#datetimepicker2').datetimepicker({
+                    format: 'YYYY-MM-DD HH:mm:ss',
+                });
                 $('select').select2({
                     placeholder: 'Select or search an option'
                 });

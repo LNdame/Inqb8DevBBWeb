@@ -10,6 +10,7 @@
                 <form role="form" id="add-establishment" action="/save_user" method="post">
                     {{ csrf_field() }}
                     <input id="creator_id" hidden name="creator_id" type="number" value="{{Auth::user()->id}}">
+                    <input id="establishment_id" name="establishment_id" hidden value="61"/>
                     <div class="box-body">
                         <div class="row">
 
@@ -57,7 +58,7 @@
                         <div id="establishments" class="row">
                             <div class="col-md-6 form-group">
                                 <label for="establishment_id">Establishment</label>
-                                <select id="establishment_id" name="establishment_id" class="form-control" required>
+                                <select id="establishment_id" name="establishment_id" class="form-control">
                                     <option></option>
                                     @foreach($establishments as $establishment)
                                         <option value="{{$establishment->id}}">{{$establishment->name}}</option>
@@ -66,9 +67,9 @@
                             </div>
 
                         </div>
-                        {{--<div class="row">--}}
-                        {{----}}
-                        {{--</div>--}}
+                        <div class="row">
+
+                        </div>
                         <hr>
                         <label>*Auto generated credentials - Credentials will be mailed to the user.</label>
                         <div class="row">
@@ -112,6 +113,10 @@
                     $("#username").val($("#email").val());
                     $("#password").val(randomstring);
                 });
+
+//                $('#establishment_id').on('change', function () {
+//
+//                }
                 $('#role_id').on('change', function () {
                     var selected_value = this.value;
                     if (selected_value == 3) {

@@ -34,6 +34,7 @@ class PromotionsController extends Controller
                 ->join('establishments', 'establishments.id', 'promotions.establishment_id')
                 ->join('users', 'users.id', 'promotions.creator_id')
                 ->join('beers', 'beers.id', 'promotions.beer_id')
+                ->where('promotions.creator_id',Auth::user()->id)
                 ->select('title', 'promotions.id', 'start_date', 'end_date', 'promotions.status', 'promotions.price', 'beers.name as beer_name', 'establishments.name as est_name')->get();
         } else {
             $promotions = DB::table('promotions')
@@ -153,6 +154,7 @@ class PromotionsController extends Controller
         $promotions = DB::table('promotions')
             ->join('establishments', 'establishments.id', 'promotions.establishment_id')
             ->join('beers', 'beers.id', 'promotions.beer_id')
+            ->where('promotions.status','active')
             ->select('title', 'promotions.id', 'start_date', 'end_date', 'promotions.beer_id', 'promotions.establishment_id', 'promotions.status', 'promotions.price', 'beers.name as beer_name', 'establishments.name as establishment_name')->get();
 //        dd($promotions);
         return response()->json($promotions);
@@ -175,6 +177,7 @@ class PromotionsController extends Controller
 
         try {
             $input = $request->all();
+//
             $promotion = Promotion::create($input);
 
             DB::commit();

@@ -6,15 +6,17 @@
 
         <!-- Sidebar user panel (optional) -->
         @if (! Auth::guest())
-            <div class="user-panel">
+            <div class="user-panel" style="height: 8em;">
                 <div class="pull-left image">
-                    <img src="{{ Gravatar::get($user->email) }}" class="img-circle" alt="User Image" />
+                    <a href="{{ url('/update_user_profile/'.\Illuminate\Support\Facades\Auth::user()->id) }}"> <img
+                                src="{{isset($user->picture_url)? $user->picture_url:Gravatar::get($user->email) }}"
+                                class="img-circle" alt="User Image"/></a>
                 </div>
-                <div class="pull-left info">
-                    <p>{{ Auth::user()->name }}</p>
-                    <!-- Status -->
-                    <a href="#"><i class="fa fa-circle text-success"></i> {{ trans('adminlte_lang::message.online') }}</a>
-                </div>
+                {{--<div class="pull-left info">--}}
+                    {{--<p>{{ Auth::user()->name }}</p>--}}
+                    {{--<!-- Status -->--}}
+                    {{--<a href="#"><i class="fa fa-circle text-success"></i> {{ trans('adminlte_lang::message.online') }}</a>--}}
+                {{--</div>--}}
             </div>
         @endif
 
