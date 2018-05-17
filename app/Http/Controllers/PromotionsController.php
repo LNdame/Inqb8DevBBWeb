@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\BeerLover;
+use App\Discount;
 use Illuminate\Http\Request;
 use DB;
 use Yajra\Datatables\Datatables;
@@ -148,7 +150,6 @@ class PromotionsController extends Controller
     }
 
 
-
     public function apiPromotions()
     {
         $promotions = DB::table('promotions')
@@ -170,6 +171,18 @@ class PromotionsController extends Controller
 //
         return response()->json($promotion);
 
+    }
+
+    public function getReferalCount($referal_code)
+    {
+        $count = count(BeerLover::where('referal_code', $referal_code)->get());
+        return response()->json($count);
+    }
+
+    public function getDiscountsCounter($id)
+    {
+        $count = count(Discount::where('beer_lover_id', $id)->get());
+        return response()->json($count);
     }
 
     public function savePromotion(Request $request)

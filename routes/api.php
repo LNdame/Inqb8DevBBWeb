@@ -36,7 +36,8 @@ Route::get('/get_event/{event}', 'EventsController@getEventApi');
 
 Route::get('get_promotions', 'PromotionsController@apiPromotions');
 Route::get('get_promotion/{id}', 'PromotionsController@apiPromotion');
-
+Route::get('/get_referal_counter/{referal_code}', 'PromotionsController@getReferalCount');
+Route::get('/get_discount_counter/{id}', 'PromotionsController@getDiscountsCounter');
 Route::get('/get_beers', 'BeersController@apiBeers');
 Route::get('/get_beer/{beer}', 'BeersController@apiBeer');
 
