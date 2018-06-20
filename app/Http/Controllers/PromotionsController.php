@@ -111,8 +111,9 @@ class PromotionsController extends Controller
 
         try {
             $promotion->update($request->all());
-            return response()->json(["message"=>"promotion updated successfully","status"=>200,"promotion"=>$promotion]);
+
             DB::commit();
+            return response()->json(["message"=>"promotion updated successfully","status"=>200,"promotion"=>$promotion]);
         } catch (\Exception $e) {
             DB::rollback();
             return response()->json(["message"=>"An error occurred, please contact Admin","status"=>500,"promotion"=>null]);
@@ -131,8 +132,9 @@ class PromotionsController extends Controller
 
         try {
             $promotion->delete();
-            return response()->json(["message"=>"promotion deleted successfully","status"=>200,"promotion"=>null]);
+
             DB::commit();
+            return response()->json(["message"=>"promotion deleted successfully","status"=>200,"promotion"=>null]);
         } catch (\Exception $e) {
             DB::rollback();
             return response()->json(["message"=>"An error occurred, please contact Admin","status"=>500,"promotion"=>null]);
