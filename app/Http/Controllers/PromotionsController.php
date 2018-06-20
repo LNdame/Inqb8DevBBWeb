@@ -103,20 +103,46 @@ class PromotionsController extends Controller
     {
         $promotion->update($request->all());
         return redirect('get_establishment_promotions');
-    }
 
+    }
+    public function updateEstablishmentPromotionApi(Request $request, Promotion $promotion)
+    {
+        DB::beginTransaction();
+
+        try {
+            $promotion->update($request->all());
+            return response()->json(["message"=>"promotion updated successfully","status"=>200,"promotion"=>$promotion]);
+            DB::commit();
+        } catch (\Exception $e) {
+            DB::rollback();
+            return response()->json(["message"=>"An error occurred, please contact Admin","status"=>500,"promotion"=>null]);
+        }
+    }
     public function deletePromotion(Promotion $promotion)
     {
         $promotion->delete();
         return redirect('get_promotions');
     }
 
+    public function deleteEstablishmentPromotionApi(Promotion $promotion)
+    {
+
+        DB::beginTransaction();
+
+        try {
+            $promotion->delete();
+            return response()->json(["message"=>"promotion deleted successfully","status"=>200,"promotion"=>null]);
+            DB::commit();
+        } catch (\Exception $e) {
+            DB::rollback();
+            return response()->json(["message"=>"An error occurred, please contact Admin","status"=>500,"promotion"=>null]);
+        }
+    }
     public function deleteEstablishmentPromotion(Promotion $promotion)
     {
         $promotion->delete();
-        return redirect('get_establishment_promotions');
-    }
 
+    }
     public function viewPromotion(Promotion $promotion)
     {
         $establishments = Establishment::all();
@@ -202,7 +228,22 @@ class PromotionsController extends Controller
 
         return redirect('get_promotions');
     }
+    public function savePromotionApi(Request $request)
+    {
+        DB::beginTransaction();
 
+        try {
+            $input = $request->all();
+            $promotion = Promotion::create($input);
+            DB::commit();
+            return response()->json(["message"=>"promotion saved successfully","status"=>200,"promotion"=>$promotion]);
+        } catch (\Exception $e) {
+            DB::rollback();
+            return response()->json(["message"=>"An error occurred, please contact Admin","status"=>500,"promotion"=>null]);
+        }
+
+//        return redirect('get_promotions');
+    }
     public function saveEstablishmentPromotion(Request $request)
     {
         DB::beginTransaction();

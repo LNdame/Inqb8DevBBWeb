@@ -12,6 +12,7 @@ use Illuminate\Http\Request;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+
 Route::get('get_beer_lover/{firebase_id}', 'UsersController@GetBeerLover');
 Route::get('get_beer_lovers', 'UsersController@GetBeerLovers');
 Route::post('store_beer_lover/', 'UsersController@SaveBeerLoverApi');
@@ -35,6 +36,10 @@ Route::get('/get_events', 'EventsController@getEventsApi');
 Route::get('/get_event/{event}', 'EventsController@getEventApi');
 
 Route::get('get_promotions', 'PromotionsController@apiPromotions');
+Route::post('/save_promotion', 'PromotionsController@savePromotionApi');
+Route::post('/update_promotion/{promotion}', 'PromotionsController@updateEstablishmentPromotionApi');
+Route::get('/delete_promotion/{promotion}', 'PromotionsController@deleteEstablishmentPromotionApi');
+
 Route::get('get_promotion/{id}', 'PromotionsController@apiPromotion');
 Route::get('/get_referal_counter/{referal_code}', 'PromotionsController@getReferalCount');
 Route::get('/get_discount_counter/{id}', 'PromotionsController@getDiscountsCounter');
@@ -44,7 +49,7 @@ Route::get('/get_beer/{beer}', 'BeersController@apiBeer');
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
-
+Route::post('establishment_login','LoginApiController@attemptLogin');
 Route::group(['prefix' => 'v1','middleware' => 'auth:api'], function () {
     //    Route::resource('task', 'TasksController');
 
