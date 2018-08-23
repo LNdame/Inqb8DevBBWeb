@@ -39,6 +39,53 @@ class EventsController extends Controller
         return view('events.create_establishment_event', compact('establishments'));
     }
 
+    public function saveEstablishmentEventApi(Request $request)
+    {
+        DB::beginTransaction();
+        try {
+            $input = $request->all();
+            $main_picture_url = $request->file('main_picture_url');
+//            $picture_2 = $request->file('picture_2');
+//            $picture_3 = $request->file('picture_3');
+            $dir = "photos/";
+
+            $img = null;
+            $img_2 = null;
+            $img_3 = null;
+
+            $path = null;
+            $path_2 = null;
+            $path_3 = null;
+
+            if (File::exists(public_path($dir)) == false) {
+                File::makeDirectory(public_path($dir), 0777, true);
+            }
+            $img = Image::make($main_picture_url->path());
+//            $img_2 = Image::make($picture_2->path());
+//            $img_3 = Image::make($picture_3->path());
+
+            $path = "{$dir}" . uniqid() . "." . $main_picture_url->getClientOriginalExtension();
+//            $path_2 = "{$dir}" . uniqid() . "." . $picture_2->getClientOriginalExtension();
+//            $path_3 = "{$dir}" . uniqid() . "." . $picture_3->getClientOriginalExtension();
+            $img->save(public_path($path));
+//            $img_2->save(public_path($path_2));
+//            $img_3->save(public_path($path_3));
+
+            $input['main_picture_url'] = $path;
+            $input['picture_2'] = $path_2;
+            $input['picture_3'] = $path_3;
+
+            $event = Event::create($input);
+            DB::commit();
+            return response()->json(["message"=>"event created successfully","status"=>200,"event"=>$event]);
+
+        } catch (\Exception $e) {
+            DB::rollback();
+            return response()->json(["message"=>"event can not be created successfully","status"=>500,"event"=>$event]);
+        }
+//        return redirect('get_establishment_events');
+    }
+
     public function saveEstablishmentEvent(Request $request)
     {
         DB::beginTransaction();
@@ -102,7 +149,33 @@ class EventsController extends Controller
         return redirect('get_establishment_events');
 
     }
+    public function updateEstablishmentEventApi(Request $request, Event $event)
+    {
+        DB::beginTransaction();
+        try {
+            $input = $request->all();
+            $path = null;
+            $main_picture_url = $request->file('main_picture_url');
+            $dir = "photos/";
 
+            if ($main_picture_url != null) {
+                $img = Image::make($main_picture_url->path());
+                $path = "{$dir}" . uniqid() . "." . $main_picture_url->getClientOriginalExtension();
+                $img->save(public_path($path));
+            } else {
+                $path = $event->main_picture_url;
+            }
+
+            $input['main_picture_url'] = $path;
+            $event = $event->update($input);
+            DB::commit();
+            return response()->json(["message"=>"event updated successfully","status"=>200,"event"=>$event]);
+        } catch (\Exception $e) {
+            DB::rollback();
+            return response()->json(["message"=>"error updating event".$e->getMessage(),"status"=>500,"event"=>$event]);
+        }
+//        return redirect('get_establishment_events');
+    }
     public function updateEstablishmentEvent(Request $request, Event $event)
     {
         DB::beginTransaction();
@@ -128,6 +201,11 @@ class EventsController extends Controller
             throw $e;
         }
         return redirect('get_establishment_events');
+    }
+    public function getEstablishmentEventsApi($id)
+    {
+        $events = Event::where('creator_id',$id)->get();
+        return $events;
     }
 
     public function getEventsApi()

@@ -13,6 +13,11 @@ use Illuminate\Http\Request;
 |
 */
 
+Route::get('/get_est_promo_count/{id}','PromotionsController@getPromoCountApi');
+Route::post('/add_est_event/','EventsController@saveEstablishmentEventApi');
+Route::post('/update_est_event/{event}','EventsController@updateEstablishmentEventApi');
+Route::get('/get_est_events/{id}', 'EventsController@getEstablishmentEventsApi');
+
 Route::get('get_beer_lover/{firebase_id}', 'UsersController@GetBeerLover');
 Route::get('get_beer_lovers', 'UsersController@GetBeerLovers');
 Route::post('store_beer_lover/', 'UsersController@SaveBeerLoverApi');

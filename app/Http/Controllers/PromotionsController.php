@@ -77,6 +77,11 @@ class PromotionsController extends Controller
     }
 
 
+    public function getPromoCountApi($id){
+        $promos = Promotion::where('establishment_id',$id)->get();
+        return response()->json(["promotions_count"=>count($promos)]);
+    }
+
     public function editPromotion(Promotion $promotion)
     {
 //        dd($promotion);
